@@ -1,0 +1,25 @@
+svg {
+  height: 350px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  z-index: -1;
+}
+
+circle {
+  fill: none;
+  stroke: #000;
+  stroke-dasharray: 440;
+  stroke-dashoffset: 70;
+}
+
+svg circle:nth-child(1) {
+  stroke-dashoffset: 0;
+  stroke: #f2f2f2;
+}
+
+svg circle:nth-child(2) {
+  stroke-linecap: round;
+}
