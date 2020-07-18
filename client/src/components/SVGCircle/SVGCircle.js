@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import "./SVGCircle.scss";
-export default class SVGCircle extends Component {
+class SVGCircle extends Component {
   render() {
     return (
       <svg
         viewBox={this.props.viewBox.toString()}
         preserveAspectRatio="xMinYMin meet"
+        className="svgCircle"
       >
         <circle
           cx="50%"
@@ -30,3 +31,5 @@ export default class SVGCircle extends Component {
     );
   }
 }
+
+export default SVGCircle;

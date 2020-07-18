@@ -1,4 +1,4 @@
-svg {
+.svgCircle {
   height: 350px;
   position: absolute;
   top: 50%;
@@ -8,18 +8,18 @@ svg {
   z-index: -1;
 }
 
-circle {
+.svgCircle circle {
   fill: none;
   stroke: #000;
   stroke-dasharray: 440;
   stroke-dashoffset: 70;
 }
 
-svg circle:nth-child(1) {
+.svgCircle circle:nth-child(1) {
   stroke-dashoffset: 0;
   stroke: #f2f2f2;
 }
 
-svg circle:nth-child(2) {
+.svgCircle circle:nth-child(2) {
   stroke-linecap: round;
 }
