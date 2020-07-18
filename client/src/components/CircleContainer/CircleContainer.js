@@ -2,6 +2,9 @@ import React from "react";
 import SVGCircle from "../SVGCircle/SVGCircle";
 import { IconButton } from "@material-ui/core";
 import { PlayArrow, Pause } from "@material-ui/icons";
+import { connect } from "react-redux";
+import { startTimer, pauseTimer } from "../../redux/actions/actions";
+
 function CircleContainer(props) {
   return (
     <div
@@ -18,7 +21,7 @@ function CircleContainer(props) {
         <IconButton
           aria-label="play arrow"
           style={{ color: props.color }}
-          onClick={props.HandleStartTimer}
+          onClick={props.startTimer}
         >
           <PlayArrow style={{ fontSize: "5rem" }} />
         </IconButton>
@@ -26,7 +29,7 @@ function CircleContainer(props) {
         <IconButton
           aria-label="play arrow"
           style={{ color: props.color }}
-          onClick={props.HandleStartTimer}
+          onClick={props.pauseTimer}
         >
           <Pause style={{ fontSize: "5rem" }} />
         </IconButton>
@@ -42,4 +45,9 @@ function CircleContainer(props) {
   );
 }
 
-export default CircleContainer;
+const mapDispatchToProps = {
+  startTimer,
+  pauseTimer,
+};
+
+export default connect(null, mapDispatchToProps)(CircleContainer);

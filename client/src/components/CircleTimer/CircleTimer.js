@@ -2,11 +2,9 @@ import React from "react";
 import "./CircleTimer.scss";
 import CircleContainer from "../CircleContainer/CircleContainer";
 import { connect } from "react-redux";
-import { startTimer } from "../../redux/actions/actions";
 function CircleTimer(props) {
   return (
     <CircleContainer
-      HandleStartTimer={props.startTimer}
       viewBox={props.viewBox}
       width={props.width}
       percents={props.percents}
@@ -24,8 +22,4 @@ const mapStateToProps = (state) => ({
   stopped: state.timer.stopped,
 });
 
-const mapDispatchToProps = {
-  startTimer,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CircleTimer);
+export default connect(mapStateToProps)(CircleTimer);
