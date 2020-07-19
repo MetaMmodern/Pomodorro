@@ -24,8 +24,8 @@ function SVGCircle(props) {
           stroke: props.color,
           boxShadow: "inset 1px 1px 1px #f2f2f205",
           strokeWidth: props.width,
-          transition:
-            props.timeInMinutes > 1 ? "stroke-dashoffset 0.1s linear" : "none",
+          // transition:
+          //   props.timeInMinutes > 1 ? "stroke-dashoffset 0.1s linear" : "none",
         }}
       />
     </svg>

@@ -7,7 +7,7 @@ import { manualStopTimer } from "../../redux/actions/actions";
 import "./TimerSection.scss";
 function TimerSection(props) {
   return (
-    <div class="timerSection">
+    <div className="timerSection">
       <div>
         <TaskSelector />
       </div>

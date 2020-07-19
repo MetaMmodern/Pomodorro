@@ -1,4 +1,10 @@
-import { TICK, START_TIMER, STOP_TIMER, PAUSE_TIMER } from "./actionTypes";
+import {
+  TICK,
+  START_TIMER,
+  STOP_TIMER,
+  PAUSE_TIMER,
+  TOGGLE_PANEL,
+} from "./actionTypes";
 
 let timer = null;
 let backtimer = null;
@@ -32,19 +38,19 @@ const tick = () => {
 
 function stopTimer(dispatch) {
   clearInterval(timer);
-  backtimer = setInterval(() => dispatch(backTick()), 3);
+  backtimer = setInterval(() => dispatch(backTick()), 4);
 }
 
 export function manualStopTimer() {
   clearInterval(timer);
   return (dispatch) => {
-    backtimer = setInterval(() => dispatch(backTick()), 3);
+    backtimer = setInterval(() => dispatch(backTick()), 4);
   };
 }
 
 const backTick = () => {
   return (dispatch, getState) => {
-    const nextTime = getState().timer.percents - 4.4;
+    const nextTime = getState().timer.percents - 1.1;
     if (nextTime >= 0) {
       dispatch({
         type: TICK,
@@ -63,5 +69,12 @@ export function pauseTimer() {
   clearInterval(timer);
   return {
     type: PAUSE_TIMER,
+  };
+}
+
+export function togglePanel(event) {
+  return {
+    type: TOGGLE_PANEL,
+    event,
   };
 }
