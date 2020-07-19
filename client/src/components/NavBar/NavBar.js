@@ -8,6 +8,8 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import { connect } from "react-redux";
+import { togglePanel } from "../../redux/actions/actions";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -19,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
-export default function NavBar() {
+function NavBar(props) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -30,11 +32,12 @@ export default function NavBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={props.togglePanel}
           >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            Timer
           </Typography>
           <Button color="inherit">Sign in</Button>
           <Button color="inherit">Sign up</Button>
@@ -43,3 +46,9 @@ export default function NavBar() {
     </div>
   );
 }
+
+const mapDispatchToProps = {
+  togglePanel,
+};
+
+export default connect(null, mapDispatchToProps)(NavBar);
