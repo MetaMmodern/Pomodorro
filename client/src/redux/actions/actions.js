@@ -8,6 +8,7 @@ import {
 
 let timer = null;
 let backtimer = null;
+
 export function startTimer() {
   return function (dispatch, getState) {
     dispatch({
@@ -30,6 +31,10 @@ const tick = () => {
         payload: nextTime,
       });
     } else {
+      dispatch({
+        type: TICK,
+        payload: 440,
+      });
       stopTimer(dispatch);
       clearInterval(timer);
     }
@@ -38,25 +43,29 @@ const tick = () => {
 
 function stopTimer(dispatch) {
   clearInterval(timer);
-  backtimer = setInterval(() => dispatch(backTick()), 4);
+  backtimer = setInterval(() => dispatch(backTick()), 8);
 }
 
 export function manualStopTimer() {
   clearInterval(timer);
   return (dispatch) => {
-    backtimer = setInterval(() => dispatch(backTick()), 4);
+    backtimer = setInterval(() => dispatch(backTick()), 8);
   };
 }
 
 const backTick = () => {
   return (dispatch, getState) => {
-    const nextTime = getState().timer.percents - 1.1;
+    const nextTime = getState().timer.percents - 17.6;
     if (nextTime >= 0) {
       dispatch({
         type: TICK,
         payload: nextTime,
       });
     } else {
+      dispatch({
+        type: TICK,
+        payload: 0,
+      });
       clearInterval(backtimer);
       dispatch({
         type: STOP_TIMER,

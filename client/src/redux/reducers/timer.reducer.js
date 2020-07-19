@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   percents: 0,
-  timeInMinutes: 0.083333,
+  timeInMinutes: 0.08333,
   color: "#3F51B5",
   width: 15,
   viewBox: [0, 0, 160, 160],

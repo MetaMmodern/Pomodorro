@@ -6,10 +6,12 @@ import {
   Typography,
   Button,
   makeStyles,
+  ButtonBase,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { connect } from "react-redux";
 import { togglePanel } from "../../redux/actions/actions";
+import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -39,7 +41,9 @@ function NavBar(props) {
           <Typography variant="h6" className={classes.title}>
             Timer
           </Typography>
-          <Button color="inherit">Sign in</Button>
+          <Button color="inherit" to={"/auth"} component={Link}>
+            Sign in
+          </Button>
           <Button color="inherit">Sign up</Button>
         </Toolbar>
       </AppBar>
