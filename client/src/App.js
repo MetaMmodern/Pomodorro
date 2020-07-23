@@ -5,12 +5,13 @@ import Panel from "./components/Panel/Panel";
 import { useRoutes } from "./routes";
 import { BrowserRouter as Router } from "react-router-dom";
 
-function App(props) {
-  const routes = useRoutes(false);
+function App() {
+  const isLogged = true;
+  const routes = useRoutes(isLogged);
   return (
     <div className="App">
       <Router>
-        <NavBar />
+        <NavBar isLogged={isLogged} />
         <Panel />
         {routes}
       </Router>

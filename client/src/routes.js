@@ -1,37 +1,28 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import TasksPage from "./pages/TasksPage/TasksPage";
-import SettingsPage from "./pages/SettingsPage/SettingsPage";
-import TimerPage from "./pages/TimerPage/TimerPage";
-import AuthPage from "./pages/AuthPage/AuthPage";
-
+const TimerPage = lazy(() => import("./pages/TimerPage/TimerPage"));
+const TasksPage = lazy(() => import("./pages/TasksPage/TasksPage"));
+const SettingsPage = lazy(() => import("./pages/SettingsPage/SettingsPage"));
+const AuthPage = lazy(() => import("./pages/AuthPage/AuthPage"));
 export function useRoutes(isAuthenticated) {
-  if (isAuthenticated) {
-    return (
-      <Switch>
-        <Route path="/" exact>
-          <TimerPage />
-        </Route>
-        <Route path="/tasks" exact>
-          <TasksPage />
-        </Route>
-        <Route path="/settings" exact>
-          <SettingsPage />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
-    );
-  } else {
-    return (
-      <Switch>
-        <Route path="/" exact>
-          <TimerPage />
-        </Route>
-        <Route path="/auth">
-          <AuthPage />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
-    );
-  }
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      {isAuthenticated ? (
+        <Switch>
+          <Route path="/" exact component={TimerPage} />
+          <Route path="/tasks" component={TasksPage} />
+          <Route path="/settings" component={SettingsPage} />
+          <Redirect to="/" />
+        </Switch>
+      ) : (
+        <Switch>
+          <Route path="/" exact component={TimerPage} />
+
+          <Route path="/auth" component={AuthPage} />
+
+          <Redirect to="/" />
+        </Switch>
+      )}
+    </Suspense>
+  );
 }
