@@ -2,7 +2,6 @@ import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
@@ -13,6 +12,7 @@ import AlarmIcon from "@material-ui/icons/Alarm";
 import LineWeightIcon from "@material-ui/icons/LineWeight";
 import { connect } from "react-redux";
 import { togglePanel } from "../../redux/actions/actions";
+import { NavLink } from "react-router-dom";
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -35,14 +35,13 @@ function Panel(props) {
       onKeyDown={props.togglePanel}
     >
       <List>
-        <ListItem button key={"Timer"}>
+        <ListItem button key={"Timer"} component={NavLink} to="/">
           <ListItemIcon>
             <AlarmIcon />
           </ListItemIcon>
           <ListItemText primary={"Timer"} />
         </ListItem>
-
-        <ListItem button key={"Tasks"}>
+        <ListItem button key={"Tasks"} component={NavLink} to="/tasks">
           <ListItemIcon>
             <LineWeightIcon />
           </ListItemIcon>
@@ -53,7 +52,7 @@ function Panel(props) {
       <Divider />
 
       <List>
-        <ListItem button key={"Settings"}>
+        <ListItem button key={"Settings"} component={NavLink} to="/settings">
           <ListItemIcon>
             <SettingsIcon />
           </ListItemIcon>
