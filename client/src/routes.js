@@ -7,22 +7,19 @@ const AuthPage = lazy(() => import("./pages/AuthPage/AuthPage"));
 export function useRoutes(isAuthenticated) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      {isAuthenticated ? (
-        <Switch>
-          <Route path="/" exact component={TimerPage} />
-          <Route path="/tasks" component={TasksPage} />
-          <Route path="/settings" component={SettingsPage} />
-          <Redirect to="/" />
-        </Switch>
-      ) : (
-        <Switch>
-          <Route path="/" exact component={TimerPage} />
+      <Switch>
+        <Route path="/" exact component={TimerPage} />
 
+        {isAuthenticated ? (
+          <>
+            <Route path="/tasks" component={TasksPage} />
+            <Route path="/settings" component={SettingsPage} />
+          </>
+        ) : (
           <Route path="/auth" component={AuthPage} />
-
-          <Redirect to="/" />
-        </Switch>
-      )}
+        )}
+        <Redirect to="/" />
+      </Switch>
     </Suspense>
   );
 }

@@ -6,7 +6,7 @@ import { useRoutes } from "./routes";
 import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
-  const isLogged = true;
+  const isLogged = false;
   const routes = useRoutes(isLogged);
   return (
     <div className="App">
