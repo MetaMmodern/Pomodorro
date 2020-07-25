@@ -1,0 +1,49 @@
+{
+  "default": { "material": "grey[100]", "hex": "#f5f5f5", "text": "black" },
+  "level1": { "material": "green[600]", "hex": "#43a047", "text": "white" },
+  "level2": {
+    "material": "lightGreen[700]",
+    "hex": "#689f38",
+    "text": "white"
+  },
+  "level3": {
+    "material": "yellow[500]",
+    "hex": "#ffeb3b",
+    "text": "black"
+  },
+  "level4": {
+    "material": "orange[500]",
+    "hex": "#ff9800",
+    "text": "black"
+  },
+  "level5": {
+    "material": "deepOrange[500]",
+    "hex": "#ff5722",
+    "text": "white"
+  },
+  "level6": {
+    "material": "red[500]",
+    "hex": "#f44336",
+    "text": "white"
+  },
+  "level7": {
+    "material": "pink[500]",
+    "hex": "#e91e63",
+    "text": "white"
+  },
+  "level8": {
+    "material": "pink[900]",
+    "hex": "#880e4f",
+    "text": "white"
+  },
+  "level9": {
+    "material": "purple[500]",
+    "hex": "#9c27b0",
+    "text": "white"
+  },
+  "level10": {
+    "material": "deepPurple[900]",
+    "hex": "#311b92",
+    "text": "white"
+  }
+}
