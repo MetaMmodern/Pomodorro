@@ -1,0 +1,37 @@
+{
+  "name": "pomodorro",
+  "version": "1.0.0",
+  "description": "ToDo app connected to Pomodorro technique",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MetaMmodern/Pomodorro.git"
+  },
+  "author": "metamodern <shabanovbunya@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MetaMmodern/Pomodorro/issues"
+  },
+  "homepage": "https://github.com/MetaMmodern/Pomodorro#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.25"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5"
+  }
+}
