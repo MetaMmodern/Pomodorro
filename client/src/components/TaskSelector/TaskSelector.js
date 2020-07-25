@@ -1,11 +1,5 @@
-import React from "react";
-import {
-  Select,
-  FormControl,
-  MenuItem,
-  FormHelperText,
-  makeStyles,
-} from "@material-ui/core";
+import React from 'react';
+import { Select, FormControl, MenuItem, FormHelperText, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -17,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function TaskSelector() {
-  const [age, setAge] = React.useState("");
+  const [age, setAge] = React.useState('');
   const classes = useStyles();
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -30,7 +24,7 @@ export default function TaskSelector() {
         onChange={handleChange}
         displayEmpty
         className={classes.selectEmpty}
-        inputProps={{ "aria-label": "Without label" }}
+        inputProps={{ 'aria-label': 'Without label' }}
       >
         <MenuItem value="">
           <em>No task</em>

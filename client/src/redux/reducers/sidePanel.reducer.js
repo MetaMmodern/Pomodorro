@@ -2,11 +2,11 @@ const initialState = { isOpen: false };
 
 export default function sidePanel(state = initialState, action) {
   switch (action.type) {
-    case "TOGGLE_PANEL":
+    case 'TOGGLE_PANEL':
       if (
         action.event &&
-        action.event.type === "keydown" &&
-        (action.event.key === "Tab" || action.event.key === "Shift")
+        action.event.type === 'keydown' &&
+        (action.event.key === 'Tab' || action.event.key === 'Shift')
       ) {
         return state;
       }

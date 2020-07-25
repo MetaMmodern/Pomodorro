@@ -1,5 +1,5 @@
-import React from "react";
-import "./SVGCircle.scss";
+import React from 'react';
+import './SVGCircle.scss';
 function SVGCircle(props) {
   return (
     <svg
@@ -22,7 +22,7 @@ function SVGCircle(props) {
         style={{
           strokeDashoffset: props.percents,
           stroke: props.color,
-          boxShadow: "inset 1px 1px 1px #f2f2f205",
+          boxShadow: 'inset 1px 1px 1px #f2f2f205',
           strokeWidth: props.width,
           // transition:
           //   props.timeInMinutes > 1 ? "stroke-dashoffset 0.1s linear" : "none",

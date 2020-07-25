@@ -1,17 +1,10 @@
-import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Button,
-  makeStyles,
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import { connect } from "react-redux";
-import { togglePanel } from "../../redux/actions/actions";
-import { Link } from "react-router-dom";
-import { ExitToApp } from "@material-ui/icons";
+import React from 'react';
+import { AppBar, Toolbar, IconButton, Typography, Button, makeStyles } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import { connect } from 'react-redux';
+import { togglePanel } from '../../redux/actions/actions';
+import { Link } from 'react-router-dom';
+import { ExitToApp } from '@material-ui/icons';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -43,17 +36,16 @@ function NavBar(props) {
           </Typography>
           {props.isLogged ? (
             <>
-              <div style={{ marginRight: "1rem" }}>mymail@gmail.com</div>
+              <div style={{ marginRight: '1rem' }}>mymail@gmail.com</div>
               <IconButton color="inherit">
                 <ExitToApp />
               </IconButton>
             </>
           ) : (
             <>
-              <Button color="inherit" to={"/auth"} component={Link}>
+              <Button color="inherit" to={'/auth'} component={Link}>
                 Sign in
               </Button>
-              <Button color="inherit">Sign up</Button>
             </>
           )}
         </Toolbar>

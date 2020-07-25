@@ -1,10 +1,4 @@
-import {
-  TICK,
-  START_TIMER,
-  STOP_TIMER,
-  PAUSE_TIMER,
-  TOGGLE_PANEL,
-} from "./actionTypes";
+import { TICK, START_TIMER, STOP_TIMER, PAUSE_TIMER, TOGGLE_PANEL } from './actionTypes';
 
 let timer = null;
 let backtimer = null;
@@ -15,10 +9,7 @@ export function startTimer() {
       type: START_TIMER,
     });
     clearInterval(timer);
-    timer = setInterval(
-      () => dispatch(tick()),
-      getState().timer.timeInMinutes * 150
-    );
+    timer = setInterval(() => dispatch(tick()), getState().timer.timeInMinutes * 150);
   };
 }
 
