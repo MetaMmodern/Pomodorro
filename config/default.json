@@ -1,5 +1,5 @@
 {
   "port": 5000,
-  "mongouri": "mongodb+srv://meta:12345qwerty@cluster0.fw8a2.mongodb.net/pomodorro?retryWrites=true&w=majority",
-  "jwtSecret": "metamodern pomidor"
+  "mongouri": "mongodb+srv://meta:qwerty12345@cluster0.fw8a2.mongodb.net/pomodorro?retryWrites=true&w=majority",
+  "jwtSecret": "metamodern pomidor new secret"
 }
