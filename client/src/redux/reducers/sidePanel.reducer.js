@@ -1,8 +1,8 @@
+import { TOGGLE_PANEL } from "../actions/actionTypes";
 const initialState = { isOpen: false };
-
 export default function sidePanel(state = initialState, action) {
   switch (action.type) {
-    case "TOGGLE_PANEL":
+    case TOGGLE_PANEL:
       if (
         action.event &&
         action.event.type === "keydown" &&

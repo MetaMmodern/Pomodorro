@@ -1,20 +1,20 @@
-import React from "react";
-import SVGCircle from "../SVGCircle/SVGCircle";
-import { IconButton } from "@material-ui/core";
-import { PlayArrow, Pause } from "@material-ui/icons";
-import { connect } from "react-redux";
-import { startTimer, pauseTimer } from "../../redux/actions/actions";
+import React from 'react';
+import SVGCircle from '../SVGCircle/SVGCircle';
+import { IconButton } from '@material-ui/core';
+import { PlayArrow, Pause } from '@material-ui/icons';
+import { connect } from 'react-redux';
+import { startTimer, pauseTimer } from '../../redux/actions/actions';
 
 function CircleContainer(props) {
   return (
     <div
       style={{
-        height: "350px",
-        width: "100%",
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        height: '350px',
+        width: '100%',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       {props.stopped ? (
@@ -23,7 +23,7 @@ function CircleContainer(props) {
           style={{ color: props.color }}
           onClick={props.startTimer}
         >
-          <PlayArrow style={{ fontSize: "5rem" }} />
+          <PlayArrow style={{ fontSize: '5rem' }} />
         </IconButton>
       ) : (
         <IconButton
@@ -31,7 +31,7 @@ function CircleContainer(props) {
           style={{ color: props.color }}
           onClick={props.pauseTimer}
         >
-          <Pause style={{ fontSize: "5rem" }} />
+          <Pause style={{ fontSize: '5rem' }} />
         </IconButton>
       )}
 

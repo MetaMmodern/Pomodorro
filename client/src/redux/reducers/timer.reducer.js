@@ -1,14 +1,9 @@
-import {
-  TICK,
-  START_TIMER,
-  STOP_TIMER,
-  PAUSE_TIMER,
-} from "../actions/actionTypes";
+import { TICK, START_TIMER, STOP_TIMER, PAUSE_TIMER } from '../actions/actionTypes';
 
 const initialState = {
   percents: 0,
   timeInMinutes: 0.08333,
-  color: "#3F51B5",
+  color: '#3F51B5',
   width: 15,
   viewBox: [0, 0, 160, 160],
   stopped: true,
