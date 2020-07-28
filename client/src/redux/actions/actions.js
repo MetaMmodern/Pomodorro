@@ -1,4 +1,12 @@
-import { TICK, START_TIMER, STOP_TIMER, PAUSE_TIMER, TOGGLE_PANEL } from './actionTypes';
+import {
+  TICK,
+  START_TIMER,
+  STOP_TIMER,
+  PAUSE_TIMER,
+  TOGGLE_PANEL,
+  LOG_IN,
+  LOG_OUT,
+} from "./actionTypes";
 
 let timer = null;
 let backtimer = null;
@@ -9,7 +17,10 @@ export function startTimer() {
       type: START_TIMER,
     });
     clearInterval(timer);
-    timer = setInterval(() => dispatch(tick()), getState().timer.timeInMinutes * 150);
+    timer = setInterval(
+      () => dispatch(tick()),
+      getState().timer.timeInMinutes * 150
+    );
   };
 }
 
@@ -72,9 +83,25 @@ export function pauseTimer() {
   };
 }
 
+// Side Panel
 export function togglePanel(event) {
   return {
     type: TOGGLE_PANEL,
     event,
+  };
+}
+
+// Auth
+
+export function login(userId, token) {
+  return {
+    type: LOG_OUT,
+    payload: { userId, token },
+  };
+}
+
+export function logout() {
+  return {
+    type: LOG_OUT,
   };
 }

@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { TextField, Button, makeStyles, Paper } from "@material-ui/core";
+import { AuthContext } from "../../context/auth.context";
+import { useHttp } from "../../hooks/http.request";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   AuthBlock: {
@@ -17,11 +20,14 @@ const useStyles = makeStyles((theme) => ({
   },
   AuthBlock__input: { marginBottom: "2rem", width: "100%" },
   AuthBlock__AuthBtn: { marginBottom: "2rem" },
+  AuthBlock__Alert: { marginBottom: "2rem" },
   AuthBlock__NoAcc: { fontSize: "0.9rem", textAlign: "right" },
 }));
 
-export default function AuthPage() {
+export default function AuthPage(props) {
+  const { login } = useContext(AuthContext);
   const [state, setState] = useState({ email: "", password: "" });
+  const { request, error } = useHttp();
   const classes = useStyles();
   const handleFormChange = (e) => {
     switch (e.target.id) {
@@ -35,8 +41,19 @@ export default function AuthPage() {
         break;
     }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const data = await request(
+        "/api/auth/login",
+        "POST",
+        { email: state.email, password: state.password },
+        {}
+      );
+      console.log("got this data:", data);
+      login(data.token, data.userId);
+    } catch (error) {}
   };
   return (
     <form onSubmit={handleSubmit} className={classes.AuthBlock}>
@@ -44,11 +61,12 @@ export default function AuthPage() {
         <TextField
           id="current-email"
           label="Email"
-          type="email"
+          type="text"
           required={true}
           value={state.email}
           className={classes.AuthBlock__input}
           onChange={handleFormChange}
+          autoComplete="true"
         />
         <TextField
           id="current-password"
@@ -58,7 +76,15 @@ export default function AuthPage() {
           value={state.password}
           className={classes.AuthBlock__input}
           onChange={handleFormChange}
+          autoComplete="true"
         />
+        {error && (
+          <Alert severity="error" className={classes.AuthBlock__Alert}>
+            <AlertTitle>Error</AlertTitle>
+            {error}
+          </Alert>
+        )}
+
         <Button
           variant="contained"
           color="primary"

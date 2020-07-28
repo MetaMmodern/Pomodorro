@@ -16,7 +16,6 @@ export const useHttp = () => {
           body: JSON.stringify(body),
           headers,
         });
-        console.log(JSON.stringify(body));
         const data = await response.json();
         if (!response.ok) {
           throw new Error(

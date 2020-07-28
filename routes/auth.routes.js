@@ -51,5 +51,46 @@ router.post(
     // eslint-disable-next-line comma-dangle
   }
 );
+router.post(
+  "/login",
+  [body("password", "No password provided").exists()],
+  async (request, response) => {
+    try {
+      const errors = validationResult(request);
+      //here goes some code
+      if (!errors.isEmpty()) {
+        return response.status(401).json({
+          errors: errors.array(),
+          message: "Incorrect data",
+        });
+      }
+      const { email, password } = request.body;
+      const user = await User.findOne({
+        $or: [{ email: email }, { username: email }],
+      });
+      if (!user) {
+        return response.status(404).json({ message: "User not found" });
+      }
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return response.status(401).json({ message: "Incorrect password" });
+      }
+      const token = jwt.sign(
+        {
+          userId: user.id,
+        },
+        config.get("jwtSecret"),
+        { expiresIn: "1h" }
+      );
+      return response.json({ token, userId: user.id });
+    } catch (error) {
+      console.log(error);
+      return response
+        .status(500)
+        .json({ message: "Error, try again", code: error });
+    }
+    // eslint-disable-next-line comma-dangle
+  }
+);
 
 module.exports = router;
