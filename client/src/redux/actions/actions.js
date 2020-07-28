@@ -8,74 +8,77 @@ import {
 
 let timer = null;
 let backtimer = null;
-
+const worker = new Worker("./workers/timer.worker.js");
 export function startTimer() {
   return function (dispatch, getState) {
     dispatch({
       type: START_TIMER,
     });
-    clearInterval(timer);
-    timer = setInterval(
-      () => dispatch(tick()),
-      getState().timer.timeInMinutes * 150
-    );
-  };
-}
-
-const tick = () => {
-  return (dispatch, getState) => {
-    const nextTime = getState().timer.percents + 1.1;
-    if (nextTime <= 440) {
-      dispatch({
-        type: TICK,
-        payload: nextTime,
-      });
-    } else {
-      dispatch({
-        type: TICK,
-        payload: 440,
-      });
-      stopTimer(dispatch);
-      clearInterval(timer);
+    switch (getState().timer.currentDirection) {
+      case "backward":
+        worker.postMessage({
+          action: "reverse",
+          interval: getState().timer.timeBackInMinutes * 150,
+          startValue: getState().timer.percents,
+        });
+        break;
+      default:
+        worker.postMessage({
+          action: "start",
+          interval: getState().timer.timeInMinutes * 150,
+          startValue: getState().timer.percents,
+        });
+        break;
     }
-  };
-};
 
-function stopTimer(dispatch) {
-  clearInterval(timer);
-  backtimer = setInterval(() => dispatch(backTick()), 8);
+    worker.onmessage = (e) => {
+      switch (e.data.response) {
+        case "update":
+          dispatch({
+            type: TICK,
+            payload: {
+              percents: e.data.nextTime,
+              currentDirection: e.data.direction,
+            },
+          });
+          break;
+        case "startReverse":
+          worker.postMessage({
+            action: "reverse",
+            interval: getState().timer.timeBackInMinutes * 150,
+            startValue: getState().timer.percents,
+          });
+          break;
+        case "stop":
+          dispatch({
+            type: TICK,
+            payload: { percents: e.data.nextTime, currentDirection: "forward" },
+          });
+          dispatch({
+            type: STOP_TIMER,
+          });
+
+          break;
+        default:
+          break;
+      }
+    };
+  };
 }
 
 export function manualStopTimer() {
-  clearInterval(timer);
-  return (dispatch) => {
-    backtimer = setInterval(() => dispatch(backTick()), 8);
+  return (_, getState) => {
+    worker.postMessage({
+      action: "drop",
+      startValue: getState().timer.percents,
+    });
   };
 }
 
-const backTick = () => {
-  return (dispatch, getState) => {
-    const nextTime = getState().timer.percents - 17.6;
-    if (nextTime >= 0) {
-      dispatch({
-        type: TICK,
-        payload: nextTime,
-      });
-    } else {
-      dispatch({
-        type: TICK,
-        payload: 0,
-      });
-      clearInterval(backtimer);
-      dispatch({
-        type: STOP_TIMER,
-      });
-    }
-  };
-};
-
 export function pauseTimer() {
-  clearInterval(timer);
+  worker.postMessage({
+    action: "pause",
+  });
   return {
     type: PAUSE_TIMER,
   };
@@ -85,5 +88,20 @@ export function togglePanel(event) {
   return {
     type: TOGGLE_PANEL,
     event,
+  };
+}
+
+// Auth
+
+export function login(userId, token) {
+  return {
+    type: LOG_IN,
+    payload: { userId, token },
+  };
+}
+
+export function logout() {
+  return {
+    type: LOG_OUT,
   };
 }
