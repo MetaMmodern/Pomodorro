@@ -2,12 +2,14 @@ import { TICK, START_TIMER, STOP_TIMER, PAUSE_TIMER } from '../actions/actionTyp
 
 const initialState = {
   percents: 0,
-  timeInMinutes: 0.08333,
-  color: '#3F51B5',
+  timeInMinutes: 5,
+  timeBackInMinutes: 1,
+  color: "#3F51B5",
   width: 15,
   viewBox: [0, 0, 160, 160],
   stopped: true,
   paused: false,
+  currentDirection: false,
 };
 
 export default function timer(state = initialState, action) {
@@ -26,7 +28,8 @@ export default function timer(state = initialState, action) {
     case TICK:
       return {
         ...state,
-        percents: action.payload,
+        percents: action.payload.percents,
+        currentDirection: action.payload.currentDirection,
       };
     case PAUSE_TIMER:
       return {
