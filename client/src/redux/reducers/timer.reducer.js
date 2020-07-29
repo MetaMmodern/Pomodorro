@@ -1,15 +1,21 @@
-import { TICK, START_TIMER, STOP_TIMER, PAUSE_TIMER } from '../actions/actionTypes';
+import {
+  TICK,
+  START_TIMER,
+  STOP_TIMER,
+  PAUSE_TIMER,
+} from "../actions/actionTypes";
 
 const initialState = {
   percents: 0,
-  timeInMinutes: 5,
-  timeBackInMinutes: 1,
+  timeInMinutes: 0.1,
+  timeBackInMinutes: 0.08,
   color: "#3F51B5",
+  backwardColor: "#43a047",
   width: 15,
   viewBox: [0, 0, 160, 160],
   stopped: true,
   paused: false,
-  currentDirection: false,
+  currentDirection: "forward",
 };
 
 export default function timer(state = initialState, action) {

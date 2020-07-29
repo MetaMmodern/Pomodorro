@@ -1,7 +1,7 @@
-import React from 'react';
-import './CircleTimer.scss';
-import CircleContainer from '../CircleContainer/CircleContainer';
-import { connect } from 'react-redux';
+import React from "react";
+import "./CircleTimer.scss";
+import CircleContainer from "../CircleContainer/CircleContainer";
+import { connect } from "react-redux";
 function CircleTimer(props) {
   return (
     <CircleContainer
@@ -10,6 +10,9 @@ function CircleTimer(props) {
       percents={props.percents}
       color={props.color}
       stopped={props.stopped}
+      backwardColor={props.backwardColor}
+      paused={props.paused}
+      direction={props.direction}
     />
   );
 }
@@ -18,8 +21,10 @@ const mapStateToProps = (state) => ({
   width: state.timer.width,
   percents: state.timer.percents,
   color: state.timer.color,
-  timeInMinutes: state.timer.timeInMinutes,
   stopped: state.timer.stopped,
+  direction: state.timer.currentDirection,
+  backwardColor: state.timer.backwardColor,
+  paused: state.timer.paused,
 });
 
 export default connect(mapStateToProps)(CircleTimer);

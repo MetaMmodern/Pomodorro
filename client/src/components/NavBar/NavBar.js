@@ -13,6 +13,7 @@ import { togglePanel } from "../../redux/actions/actions";
 import { Link } from "react-router-dom";
 import { ExitToApp } from "@material-ui/icons";
 import { AuthContext } from "../../context/auth.context";
+import { Account } from "../Account/Account";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -46,7 +47,7 @@ function NavBar(props) {
           </Typography>
           {props.isLogged ? (
             <>
-              <div style={{ marginRight: "1rem" }}>mymail@gmail.com</div>
+              <Account username={props.username} />
               <IconButton color="inherit" onClick={logout}>
                 <ExitToApp />
               </IconButton>

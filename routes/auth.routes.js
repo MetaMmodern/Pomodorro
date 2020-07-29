@@ -82,7 +82,11 @@ router.post(
         config.get("jwtSecret"),
         { expiresIn: "1h" }
       );
-      return response.json({ token, userId: user.id });
+      return response.json({
+        token,
+        userId: user.id,
+        username: user.username ? user.username : user.email,
+      });
     } catch (error) {
       console.log(error);
       return response

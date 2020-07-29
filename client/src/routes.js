@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import TimerPage from "./pages/TimerPage/TimerPage";
@@ -16,23 +16,19 @@ export function useRoutes(isAuthenticated) {
   if (!isAuthenticated) {
     return (
       <Switch>
-        {/* <Suspense fallback={<div>Loading...</div>}> */}
         <Route path="/" exact component={TimerPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <Redirect to="/" />
-        {/* </Suspense> */}
       </Switch>
     );
   } else {
     return (
       <Switch>
-        {/* <Suspense fallback={<div>Loading...</div>}> */}
         <Route path="/" exact component={TimerPage} />
         <Route path="/tasks" component={TasksPage} />
         <Route path="/settings" component={SettingsPage} />
         <Redirect to="/" />
-        {/* </Suspense> */}
       </Switch>
     );
   }

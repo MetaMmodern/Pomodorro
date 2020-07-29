@@ -8,14 +8,14 @@ import { useAuth } from "./hooks/auth.hook";
 import { AuthContext } from "./context/auth.context";
 
 function App() {
-  const { login, logout, token, userId } = useAuth();
+  const { login, logout, token, userId, username } = useAuth();
   const isAuth = !!token;
   const routes = useRoutes(isAuth);
   return (
     <AuthContext.Provider value={{ token, userId, login, logout, isAuth }}>
       <div className="App">
         <Router>
-          <NavBar isLogged={isAuth} />
+          <NavBar isLogged={isAuth} username={username} />
           <Panel />
           {routes}
         </Router>

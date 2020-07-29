@@ -8,8 +8,6 @@ import {
   LOG_OUT,
 } from "./actionTypes";
 
-let timer = null;
-let backtimer = null;
 const worker = new Worker("./workers/timer.worker.js");
 export function startTimer() {
   return function (dispatch, getState) {
