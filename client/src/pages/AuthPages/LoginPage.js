@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   AuthBlock__NoAcc: { fontSize: "0.9rem", textAlign: "right" },
 }));
 
-export default function AuthPage() {
+export default function LoginPage(props) {
   const { login } = useContext(AuthContext);
   const [state, setState] = useState({ email: "", password: "" });
   const { request, error } = useHttp();

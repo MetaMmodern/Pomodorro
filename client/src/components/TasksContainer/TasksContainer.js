@@ -1,31 +1,29 @@
-import React from 'react';
-import Task from '../Task/Task';
-import './TasksContainer.scss';
-import { Grid } from '@material-ui/core';
-export default function TasksContainer() {
+import React from "react";
+import Task from "../Task/Task";
+import { Grid } from "@material-ui/core";
+import "./TasksContainer.scss";
+export default function TasksContainer({ tasks, updateTasks }) {
   return (
     <div className="TasksContainer">
       <Grid
         container
         spacing={1}
         style={{
-          marginLeft: 'auto',
-          marginRight: 'auto',
+          marginLeft: "auto",
+          marginRight: "auto",
         }}
         justify="flex-start"
       >
-        <Task text="long task name" />
-        <Task text="long task name" />
-        <Task text="very very very long task name" />
-        <Task text="long task name" />
-        <Task text="long task name" />
-        <Task text="long task name" />
-        <Task text="long task name" />
-        <Task text="short task" />
-        <Task text="long task name" />
-        <Task text="very very very long task name" />
-        <Task text="very very very long task name" />
-        <Task text="short task name" />
+        {tasks.map((task) => {
+          return (
+            <Task
+              text={task[1].name}
+              key={task[1]._id}
+              id={task[1]._id}
+              updateTasks={updateTasks}
+            />
+          );
+        })}
       </Grid>
     </div>
   );
