@@ -1,11 +1,13 @@
-import React from 'react';
-import './SVGCircle.scss';
+import React from "react";
+
+import useStyles from "./SVGCircle.style";
 function SVGCircle(props) {
+  const classes = useStyles();
   return (
     <svg
       viewBox={props.viewBox.toString()}
       preserveAspectRatio="xMinYMin meet"
-      className="svgCircle"
+      className={classes.svgCircle}
     >
       <circle
         cx="50%"
@@ -14,18 +16,17 @@ function SVGCircle(props) {
         style={{
           strokeWidth: props.width,
         }}
+        className={classes.shadowCircle}
       />
       <circle
         cx="50%"
         cy="50%"
         r="70"
+        className={classes.timerCircle}
         style={{
           strokeDashoffset: props.percents,
           stroke: props.color,
-          boxShadow: 'inset 1px 1px 1px #f2f2f205',
           strokeWidth: props.width,
-          // transition:
-          //   props.timeInMinutes > 1 ? "stroke-dashoffset 0.1s linear" : "none",
         }}
       />
     </svg>

@@ -1,7 +1,7 @@
 import React from "react";
-import "./CircleTimer.scss";
 import CircleContainer from "../CircleContainer/CircleContainer";
 import { connect } from "react-redux";
+
 function CircleTimer(props) {
   return (
     <CircleContainer

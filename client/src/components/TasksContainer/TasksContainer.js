@@ -1,10 +1,11 @@
 import React from "react";
 import Task from "../Task/Task";
 import { Grid } from "@material-ui/core";
-import "./TasksContainer.scss";
+import useStyles from "./TasksContainer.style";
 export default function TasksContainer({ tasks, updateTasks }) {
+  const classes = useStyles();
   return (
-    <div className="TasksContainer">
+    <div className={classes.TasksContainer}>
       <Grid
         container
         spacing={1}

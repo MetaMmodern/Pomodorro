@@ -1,10 +1,13 @@
 import React, { useState, useContext, useCallback, useEffect } from "react";
 import TaskAdder from "../../components/TaskAdder/TaskAdder";
 import TasksContainer from "../../components/TasksContainer/TasksContainer";
-import "./TasksPage.scss";
 import { useHttp } from "../../hooks/http.request";
 import { AuthContext } from "../../context/auth.context";
+
+import useStyles from "./TasksPage.style";
+
 export default function TasksPage() {
+  const classes = useStyles();
   const [tasks, setTasks] = useState([]);
   const { loading, request } = useHttp();
   const { token } = useContext(AuthContext);
@@ -18,7 +21,7 @@ export default function TasksPage() {
     fetchTasks();
   }, [fetchTasks]);
   return (
-    <div className="TasksPage">
+    <div className={classes.TasksPage}>
       <TaskAdder updateTasks={fetchTasks} />
       {loading ? (
         <div>loading...</div>
