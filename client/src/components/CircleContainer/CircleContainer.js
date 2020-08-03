@@ -4,22 +4,13 @@ import { IconButton } from "@material-ui/core";
 import { PlayArrow, Pause } from "@material-ui/icons";
 import { connect } from "react-redux";
 import { startTimer, pauseTimer } from "../../redux/actions/actions";
-
+import useStyles from "./CircleContainer.style";
 function CircleContainer(props) {
+  const classes = useStyles();
   const color =
     props.direction === "forward" ? props.color : props.backwardColor;
   return (
-    <div
-      style={{
-        height: "350px",
-        maxHeight: "90vw",
-        width: "100%",
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <div className={classes.CircleContainer}>
       {props.stopped ? (
         <IconButton
           aria-label="play arrow"
@@ -31,7 +22,7 @@ function CircleContainer(props) {
       ) : (
         <IconButton
           aria-label="play arrow"
-          style={{ color: color }}
+          style={{ color }}
           onClick={props.pauseTimer}
         >
           <Pause style={{ fontSize: "5rem" }} />

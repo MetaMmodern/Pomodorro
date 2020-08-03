@@ -1,32 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import {
-  TextField,
-  Button,
-  makeStyles,
-  Paper,
-  Snackbar,
-} from "@material-ui/core";
+import { TextField, Button, Paper, Snackbar } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { useHttp } from "../../hooks/http.request";
 
-const useStyles = makeStyles((theme) => ({
-  AuthBlock: {
-    display: "flex",
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  AuthBlock__container: {
-    width: "30rem",
-    maxWidth: "70%",
-    padding: "1rem 2rem",
-  },
-  AuthBlock__input: { marginBottom: "2rem", width: "100%" },
-  AuthBlock__AuthBtn: { marginBottom: "2rem" },
-  AuthBlock__NoAcc: { fontSize: "0.9rem", textAlign: "right" },
-}));
+import useStyles from "./RegisterPage.style";
 
 export default function RegisterPage() {
   const history = useHistory();
@@ -81,7 +59,7 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await request("/api/auth/register", "POST", {
+      await request("/api/auth/register", "POST", {
         email: state.email,
         password: state.password,
         username: state.username,

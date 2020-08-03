@@ -1,26 +1,20 @@
-import React from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import SettingsIcon from '@material-ui/icons/Settings';
-import AlarmIcon from '@material-ui/icons/Alarm';
-import LineWeightIcon from '@material-ui/icons/LineWeight';
-import { connect } from 'react-redux';
-import { togglePanel } from '../../redux/actions/actions';
-import { NavLink } from 'react-router-dom';
-const useStyles = makeStyles({
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
-});
+import React from "react";
+import clsx from "clsx";
+import {
+  List,
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  SwipeableDrawer,
+} from "@material-ui/core";
+import { Settings, Alarm, LineWeight } from "@material-ui/icons";
+import { connect } from "react-redux";
+import { togglePanel } from "../../redux/actions/actions";
+import { NavLink } from "react-router-dom";
+
+import useStyles from "./Panel.style";
+
 function Panel(props) {
   const classes = useStyles();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -35,28 +29,28 @@ function Panel(props) {
       onKeyDown={props.togglePanel}
     >
       <List>
-        <ListItem button key={'Timer'} component={NavLink} to="/">
+        <ListItem button key={"Timer"} component={NavLink} to="/">
           <ListItemIcon>
-            <AlarmIcon />
+            <Alarm />
           </ListItemIcon>
-          <ListItemText primary={'Timer'} />
+          <ListItemText primary={"Timer"} />
         </ListItem>
-        <ListItem button key={'Tasks'} component={NavLink} to="/tasks">
+        <ListItem button key={"Tasks"} component={NavLink} to="/tasks">
           <ListItemIcon>
-            <LineWeightIcon />
+            <LineWeight />
           </ListItemIcon>
-          <ListItemText primary={'Tasks'} />
+          <ListItemText primary={"Tasks"} />
         </ListItem>
       </List>
 
       <Divider />
 
       <List>
-        <ListItem button key={'Settings'} component={NavLink} to="/settings">
+        <ListItem button key={"Settings"} component={NavLink} to="/settings">
           <ListItemIcon>
-            <SettingsIcon />
+            <Settings />
           </ListItemIcon>
-          <ListItemText primary={'Settings'} />
+          <ListItemText primary={"Settings"} />
         </ListItem>
       </List>
     </div>
@@ -64,7 +58,7 @@ function Panel(props) {
 
   return (
     <div>
-      <React.Fragment key={'left'}>
+      <React.Fragment key={"left"}>
         <SwipeableDrawer
           anchor="left"
           open={props.isOpen}

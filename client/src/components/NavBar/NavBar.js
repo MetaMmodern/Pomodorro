@@ -5,7 +5,6 @@ import {
   IconButton,
   Typography,
   Button,
-  makeStyles,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { connect } from "react-redux";
@@ -14,17 +13,9 @@ import { Link } from "react-router-dom";
 import { ExitToApp } from "@material-ui/icons";
 import { AuthContext } from "../../context/auth.context";
 import { Account } from "../Account/Account";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+
+import useStyles from "./NavBar.style";
+
 function NavBar(props) {
   const { logout } = useContext(AuthContext);
 

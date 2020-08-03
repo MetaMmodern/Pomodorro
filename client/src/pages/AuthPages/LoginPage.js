@@ -1,28 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { TextField, Button, makeStyles, Paper } from "@material-ui/core";
+import { TextField, Button, Paper } from "@material-ui/core";
 import { AuthContext } from "../../context/auth.context";
 import { useHttp } from "../../hooks/http.request";
 import { Alert, AlertTitle } from "@material-ui/lab";
 
-const useStyles = makeStyles((theme) => ({
-  AuthBlock: {
-    display: "flex",
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  AuthBlock__container: {
-    width: "25rem",
-    maxWidth: "70%",
-    padding: "1rem 2rem",
-  },
-  AuthBlock__input: { marginBottom: "2rem", width: "100%" },
-  AuthBlock__AuthBtn: { marginBottom: "2rem" },
-  AuthBlock__Alert: { marginBottom: "2rem" },
-  AuthBlock__NoAcc: { fontSize: "0.9rem", textAlign: "right" },
-}));
+import useStyles from "./LoginPage.style";
 
 export default function LoginPage(props) {
   const { login } = useContext(AuthContext);

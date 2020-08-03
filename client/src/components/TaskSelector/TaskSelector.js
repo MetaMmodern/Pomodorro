@@ -4,7 +4,6 @@ import {
   FormControl,
   MenuItem,
   FormHelperText,
-  makeStyles,
 } from "@material-ui/core";
 import { useEffect } from "react";
 import { useCallback } from "react";
@@ -12,15 +11,7 @@ import { useHttp } from "../../hooks/http.request";
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
+import useStyles from "./TaskSelector.style";
 export default function TaskSelector() {
   const { token } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);

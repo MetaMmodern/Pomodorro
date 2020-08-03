@@ -3,8 +3,10 @@ import { useHttp } from "../../hooks/http.request";
 import { AuthContext } from "../../context/auth.context";
 import { TextField, IconButton } from "@material-ui/core";
 import { AddCircle } from "@material-ui/icons";
-import "./TaskAdder.scss";
+import useStyles from "./TaskAdder.style";
+
 export default function TaskAdder(props) {
+  const classes = useStyles();
   const firstFire = useRef(false);
   const { request } = useHttp();
   const [task, setTask] = useState("");
@@ -49,7 +51,7 @@ export default function TaskAdder(props) {
     }
   };
   return (
-    <div className="TaskAdder">
+    <div className={classes.TaskAdder}>
       <form action="none" style={{ display: "flex", alignItems: "center" }}>
         {tasklength ? (
           <TextField

@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.scss";
+import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import Panel from "./components/Panel/Panel";
 import { useRoutes } from "./routes";
