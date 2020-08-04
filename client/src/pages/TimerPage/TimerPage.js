@@ -10,7 +10,12 @@ function TimerSection(props) {
   return (
     <div className={classes.timerSection}>
       <div>
-        <TaskSelector />
+        <TaskSelector
+          selectedTask={{
+            currentTask: props?.location?.taskProp?.currentTask,
+            id: props?.location?.taskProp?.id,
+          }}
+        />
       </div>
       <CircleTimer className={classes.CircleTimer} />
 

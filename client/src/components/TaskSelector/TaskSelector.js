@@ -12,14 +12,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 
 import useStyles from "./TaskSelector.style";
-export default function TaskSelector() {
+export default function TaskSelector(props) {
   const { token } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
-  const [task, setTask] = useState("");
+  const [task, setTask] = useState({ name: "", id: "" });
   const { request, loading } = useHttp();
   const classes = useStyles();
-  const handleChange = (event) => {
-    setTask(event.target.value);
+  const handleChange = ({ name, id }) => {
+    setTask({ name, id });
   };
   const fetchTasks = useCallback(async () => {
     const data = await request("/api/tasks/", "GET", null, {
@@ -32,6 +32,18 @@ export default function TaskSelector() {
       fetchTasks();
     }
   }, [fetchTasks, token]);
+  useEffect(() => {
+    if (
+      props.selectedTask !== undefined &&
+      props.selectedTask.id !== undefined
+    ) {
+      setTask({
+        name: props.selectedTask.currentTask,
+        id: props.selectedTask.id,
+      });
+    }
+  }, [props.selectedTask]);
+
   if (!token) {
     return <></>;
   }
@@ -40,8 +52,10 @@ export default function TaskSelector() {
   ) : (
     <FormControl className={classes.formControl}>
       <Select
-        value={task}
-        onChange={handleChange}
+        value={task.name}
+        onChange={(e) =>
+          handleChange({ name: e.target.value, id: e.target.id })
+        }
         displayEmpty
         className={classes.selectEmpty}
         inputProps={{ "aria-label": "Select Task" }}
@@ -51,7 +65,7 @@ export default function TaskSelector() {
         </MenuItem>
         {tasks.map(([_, task]) => {
           return (
-            <MenuItem value={task.name} key={task["_id"]}>
+            <MenuItem value={task.name} key={task["_id"]} id={task["_id"]}>
               {task.name}
             </MenuItem>
           );

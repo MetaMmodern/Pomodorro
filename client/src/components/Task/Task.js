@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Paper, IconButton } from "@material-ui/core";
 import { Edit, Delete, PlayArrow } from "@material-ui/icons";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import { useHttp } from "../../hooks/http.request";
 
@@ -55,9 +56,16 @@ export default function Task(props) {
               </IconButton>
             </div>
             <div>
-              <IconButton onClick={props.handleStart}>
-                <PlayArrow />
-              </IconButton>
+              <Link
+                to={{
+                  pathname: "/",
+                  taskProp: { currentTask: props.text, id: props.id },
+                }}
+              >
+                <IconButton>
+                  <PlayArrow />
+                </IconButton>
+              </Link>
             </div>
           </div>
         </div>
