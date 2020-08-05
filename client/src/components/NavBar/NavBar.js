@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   AppBar,
   Toolbar,
@@ -11,14 +11,11 @@ import { connect } from "react-redux";
 import { togglePanel } from "../../redux/actions/actions";
 import { Link } from "react-router-dom";
 import { ExitToApp } from "@material-ui/icons";
-import { AuthContext } from "../../context/auth.context";
 import { Account } from "../Account/Account";
 
 import useStyles from "./NavBar.style";
 
 function NavBar(props) {
-  const { logout } = useContext(AuthContext);
-
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -39,9 +36,6 @@ function NavBar(props) {
           {props.isLogged ? (
             <>
               <Account username={props.username} />
-              <IconButton color="inherit" onClick={logout}>
-                <ExitToApp />
-              </IconButton>
             </>
           ) : (
             <>
