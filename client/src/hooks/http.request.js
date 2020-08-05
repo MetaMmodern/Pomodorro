@@ -13,7 +13,7 @@ export const useHttp = () => {
         }
         const response = await fetch(url, {
           method,
-          body: JSON.stringify(body),
+          body: body ? JSON.stringify(body) : null,
           headers,
         });
         const data = await response.json();

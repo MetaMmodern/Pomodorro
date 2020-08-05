@@ -1,34 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import {
-  TextField,
-  Button,
-  makeStyles,
-  Paper,
-  Snackbar,
-} from "@material-ui/core";
+import { Link, useHistory } from "react-router-dom";
+import { TextField, Button, Paper, Snackbar } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { useHttp } from "../../hooks/http.request";
 
-const useStyles = makeStyles((theme) => ({
-  AuthBlock: {
-    display: "flex",
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  AuthBlock__container: {
-    width: "30rem",
-    maxWidth: "70%",
-    padding: "1rem 2rem",
-  },
-  AuthBlock__input: { marginBottom: "2rem", width: "100%" },
-  AuthBlock__AuthBtn: { marginBottom: "2rem" },
-  AuthBlock__NoAcc: { fontSize: "0.9rem", textAlign: "right" },
-}));
+import useStyles from "./RegisterPage.style";
 
-export default function AuthPage() {
+export default function RegisterPage() {
+  const history = useHistory();
+
   const { loading, error, request, clearError } = useHttp();
   const [state, setState] = useState({
     username: "",
@@ -39,7 +19,6 @@ export default function AuthPage() {
   });
   const [passwordsEqual, setPasswordsEqual] = useState(true);
   const [passwordLength, setPasswordsLength] = useState(true);
-  // const [open, setOpen] = useState(false);
   useEffect(() => {
     if (state.password !== "" || state.passwordConfirmed !== "") {
       if (state.password === state.passwordConfirmed) {
@@ -50,7 +29,6 @@ export default function AuthPage() {
     }
   }, [state.password, state.passwordConfirmed]);
   useEffect(() => {
-    console.log(state.password.length);
     if (state.password !== "") {
       if (state.password.length < 6) {
         setPasswordsLength(false);
@@ -81,12 +59,12 @@ export default function AuthPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await request("/api/auth/register", "POST", {
+      await request("/api/auth/register", "POST", {
         email: state.email,
         password: state.password,
         username: state.username,
       });
-      console.log(data);
+      history.push("/login");
     } catch (e) {}
   };
   return (

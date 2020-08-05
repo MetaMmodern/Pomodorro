@@ -5,14 +5,14 @@ export const useAuth = () => {
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
   const [username, setUsername] = useState(null);
-  const login = useCallback((jwtToken, id, InUsername) => {
+  const login = useCallback((jwtToken, id, inUsername) => {
     console.log("login got", jwtToken, id);
     setToken(jwtToken);
     setUserId(id);
-    setUsername(InUsername);
+    setUsername(inUsername);
     localStorage.setItem(
       storageName,
-      JSON.stringify({ userId: id, token: jwtToken, username: InUsername })
+      JSON.stringify({ userId: id, token: jwtToken, username: inUsername })
     );
   }, []);
   const logout = useCallback(() => {
