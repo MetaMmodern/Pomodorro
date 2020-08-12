@@ -2,8 +2,6 @@ import React, { useState, useContext } from "react";
 import {
   Menu,
   IconButton,
-  List,
-  ListItem,
   ListItemText,
   ListItemIcon,
   Divider,
@@ -43,12 +41,7 @@ export const Account = (props) => {
           <b>{props.username}</b>
         </MenuItem>
         <Divider />
-        <MenuItem
-          linkButton
-          component={Link}
-          to="/settings"
-          onClick={handleClose}
-        >
+        <MenuItem component={Link} to="/settings" onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>

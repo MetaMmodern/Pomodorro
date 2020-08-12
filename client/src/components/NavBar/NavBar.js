@@ -10,7 +10,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { connect } from "react-redux";
 import { togglePanel } from "../../redux/actions/actions";
 import { Link } from "react-router-dom";
-import { ExitToApp } from "@material-ui/icons";
 import { Account } from "../Account/Account";
 
 import useStyles from "./NavBar.style";
