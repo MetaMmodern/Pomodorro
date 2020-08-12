@@ -11,6 +11,7 @@ import {
 import { AccountCircle, Settings, ExitToApp } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
+import { useAuth } from "../../hooks/auth.hook";
 
 const useStyles = makeStyles({
   username: {
@@ -19,7 +20,8 @@ const useStyles = makeStyles({
     justifyContent: "center",
   },
 });
-export const Account = (props) => {
+export const Account = () => {
+  const { username } = useAuth();
   const { logout } = useContext(AuthContext);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -38,7 +40,7 @@ export const Account = (props) => {
         onClose={handleClose}
       >
         <MenuItem disabled={true} className={classes.username}>
-          <b>{props.username}</b>
+          <b>{username}</b>
         </MenuItem>
         <Divider />
         <MenuItem component={Link} to="/settings" onClick={handleClose}>
