@@ -58,7 +58,7 @@ function NavBar(props) {
           </Typography>
           {props.isLogged ? (
             <>
-              <Account />
+              <Account username={props.username} />
             </>
           ) : (
             <>

@@ -12,26 +12,27 @@ import RegisterPage from "./pages/AuthPages/RegisterPage";
 // const SettingsPage = lazy(() => import("./pages/SettingsPage/SettingsPage"));
 // const LoginPage = lazy(() => import("./pages/AuthPages/LoginPage"));
 // const RegisterPage = lazy(() => import("./pages/AuthPages/RegisterPage"));
-export function useRoutes(isAuthenticated, handleRedirect) {
-  if (!isAuthenticated) {
-    return (
-      <Switch>
-        <Route path="/" exact component={TimerPage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/register">
-          <RegisterPage handleRedirect={handleRedirect}></RegisterPage>
-        </Route>
-        <Redirect to="/" />
-      </Switch>
-    );
-  } else {
-    return (
-      <Switch>
-        <Route path="/" exact component={TimerPage} />
-        <Route path="/tasks" component={TasksPage} />
-        <Route path="/settings" component={SettingsPage} />
-        <Redirect to="/" />
-      </Switch>
-    );
-  }
+export function useRoutes(handleRedirect) {
+  let allRoutes = <></>;
+  // if (!isAuthenticated) {
+  allRoutes = (
+    <>
+      <Route path="/" exact component={TimerPage} />
+      <Route path="/login" component={LoginPage} />
+      <Route path="/register">
+        <RegisterPage handleRedirect={handleRedirect}></RegisterPage>
+      </Route>
+    </>
+  );
+  // } else {
+  //   allRoutes = (
+  //     <>
+  //       <Route path="/" exact component={TimerPage} />
+  //       <Route path="/tasks" component={TasksPage} />
+  //       <Route path="/settings" component={SettingsPage} />
+  //       <Redirect to="/" />
+  //     </>
+  //   );
+  // }
+  return <Switch>{allRoutes}</Switch>;
 }

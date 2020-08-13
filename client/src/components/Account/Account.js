@@ -20,8 +20,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
   },
 });
-export const Account = () => {
-  const { username } = useAuth();
+export const Account = ({ username }) => {
   const { logout } = useContext(AuthContext);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);

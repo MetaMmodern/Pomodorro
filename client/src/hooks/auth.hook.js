@@ -26,7 +26,6 @@ export const useAuth = () => {
     const data = JSON.parse(localStorage.getItem(storageName));
     if (data && data.token) {
       login(data.token, data.userId, data.username);
-      // history push
     }
   }, [login]);
   return { login, logout, token, userId, username };
