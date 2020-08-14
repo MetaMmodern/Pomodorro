@@ -17,6 +17,16 @@ import LoginPage from "./pages/AuthPages/LoginPage";
 import TasksPage from "./pages/TasksPage/TasksPage";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 
+const authRoutes = [
+  <Route path="/" exact key="/" component={TimerPage} />,
+  <Route path="/tasks" key="/tasks" component={TasksPage} />,
+  <Route path="/settings" key="/settings" component={SettingsPage} />,
+];
+const nonAuthRoutes = [
+  <Route path="/" key="/" exact component={TimerPage} />,
+  <Route path="/login" key="/login" component={LoginPage} />,
+  <Route path="/register" key="/register" component={RegisterPage} />,
+];
 function App() {
   const { login, logout, token, userId, username } = useAuth();
   const isAuth = !!token;
@@ -27,19 +37,7 @@ function App() {
           <Panel />
           <NavBar isLogged={isAuth} username={username} />
           <Switch>
-            {isAuth ? (
-              <>
-                <Route path="/" exact component={TimerPage} />
-                <Route path="/tasks" component={TasksPage} />
-                <Route path="/settings" component={SettingsPage} />
-              </>
-            ) : (
-              <>
-                <Route path="/" exact component={TimerPage} />
-                <Route path="/login" component={LoginPage} />
-                <Route path="/register" component={RegisterPage} />
-              </>
-            )}
+            {isAuth ? authRoutes : nonAuthRoutes}
             <Redirect to="/" />
           </Switch>
         </div>
