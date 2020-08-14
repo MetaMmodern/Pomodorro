@@ -12,26 +12,20 @@ import RegisterPage from "./pages/AuthPages/RegisterPage";
 // const SettingsPage = lazy(() => import("./pages/SettingsPage/SettingsPage"));
 // const LoginPage = lazy(() => import("./pages/AuthPages/LoginPage"));
 // const RegisterPage = lazy(() => import("./pages/AuthPages/RegisterPage"));
-export function useRoutes(isAuthenticated, handleRedirect) {
-  if (!isAuthenticated) {
-    return (
-      <Switch>
-        <Route path="/" exact component={TimerPage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/register">
-          <RegisterPage handleRedirect={handleRedirect}></RegisterPage>
-        </Route>
-        <Redirect to="/" />
-      </Switch>
-    );
-  } else {
-    return (
-      <Switch>
-        <Route path="/" exact component={TimerPage} />
-        <Route path="/tasks" component={TasksPage} />
-        <Route path="/settings" component={SettingsPage} />
-        <Redirect to="/" />
-      </Switch>
-    );
-  }
+export default function getRoutes(isAuth) {
+  const authRoutes = [
+    <Route path="/tasks" key="/tasks" component={TasksPage} />,
+    <Route path="/settings" key="/settings" component={SettingsPage} />,
+  ];
+  const nonAuthRoutes = [
+    <Route path="/login" key="/login" component={LoginPage} />,
+    <Route path="/register" key="/register" component={RegisterPage} />,
+  ];
+  return (
+    <Switch>
+      <Route path="/" key="/" exact component={TimerPage} />
+      {isAuth ? authRoutes : nonAuthRoutes}
+      <Redirect to="/" />
+    </Switch>
+  );
 }

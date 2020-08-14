@@ -11,7 +11,6 @@ import {
 import { AccountCircle, Settings, ExitToApp } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
-import { useAuth } from "../../hooks/auth.hook";
 
 const useStyles = makeStyles({
   username: {
@@ -20,8 +19,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
   },
 });
-export const Account = () => {
-  const { username } = useAuth();
+export const Account = ({ username }) => {
   const { logout } = useContext(AuthContext);
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
