@@ -40,6 +40,7 @@ function App() {
                 <Route path="/register" component={RegisterPage} />
               </>
             )}
+            <Redirect to="/" />
           </Switch>
         </div>
       </AuthContext.Provider>
