@@ -4,6 +4,7 @@ export default makeStyles((theme) => {
   return {
     saveButton: {
       margin: theme.spacing(2),
+      marginTop: 0,
     },
   };
 });

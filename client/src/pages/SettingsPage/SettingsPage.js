@@ -1,10 +1,10 @@
 import React from "react";
 
 import useStyles from "./SettingsPage.style";
-import WorkSettings from "../../components/WorkSettings/WorkSettings";
-import AccountSettings from "../../components/AccountSettings/AccountSettings";
+import WorkSettings from "./components/WorkSettings/WorkSettings";
+import AccountSettings from "./components/AccountSettings/AccountSettings";
 
-import DangerZoneSettings from "../../components/DangerZoneSettings/DangerZoneSettings";
+import DangerZoneSettings from "./components/DangerZoneSettings/DangerZoneSettings";
 
 export default function SettingsPage() {
   const classes = useStyles();

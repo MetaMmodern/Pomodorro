@@ -6,9 +6,11 @@ export default makeStyles((theme) => {
       margin: theme.spacing(2),
       display: "flex",
       alignItems: "center",
-      "& span": {
-        marginRight: theme.spacing(2),
-      },
+      "& div": { display: "flex", alignItems: "center" },
+    },
+    BlockTitle: {
+      display: "flex",
+      alignItems: "center",
     },
     saveContainer: {
       display: "flex",
