@@ -5,6 +5,7 @@ import WorkSettings from "./components/WorkSettings/WorkSettings";
 import AccountSettings from "./components/AccountSettings/AccountSettings";
 
 import DangerZoneSettings from "./components/DangerZoneSettings/DangerZoneSettings";
+import { Grid } from "@material-ui/core";
 
 export default function SettingsPage() {
   const classes = useStyles();
@@ -13,11 +14,16 @@ export default function SettingsPage() {
       <h2 className={classes.settingTitle}>Work settings</h2>
       <WorkSettings />
 
-      <h2 className={classes.settingTitle}>Account Settings</h2>
-      <AccountSettings />
-
-      <h2 className={classes.settingTitle}>Danger Zone</h2>
-      <DangerZoneSettings />
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6} md={7} lg={8}>
+          <h2 className={classes.settingTitle}>Account Settings</h2>
+          <AccountSettings />
+        </Grid>
+        <Grid item xs={12} sm={6} md={5} lg={4}>
+          <h2 className={classes.settingTitle}>Danger Zone</h2>
+          <DangerZoneSettings />
+        </Grid>
+      </Grid>
     </div>
   );
 }

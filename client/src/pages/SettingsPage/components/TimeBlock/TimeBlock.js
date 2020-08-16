@@ -6,7 +6,7 @@ const TimeBlock = (props) => {
     <div className={props.blockClassName}>
       <Grid container>
         <Grid item xs={7} sm={5} md={4} className={props.titleClassName}>
-          <span>Default {props.timeType} time:</span>
+          <div>Default {props.timeType} time:</div>
         </Grid>
         <Grid item xs={5} sm={7} md={8}>
           <TextField
