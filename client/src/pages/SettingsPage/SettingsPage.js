@@ -15,11 +15,11 @@ export default function SettingsPage() {
       <WorkSettings />
 
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} md={7} lg={8}>
+        <Grid item xs={12} sm={6} md={8}>
           <h2 className={classes.settingTitle}>Account Settings</h2>
           <AccountSettings />
         </Grid>
-        <Grid item xs={12} sm={6} md={5} lg={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <h2 className={classes.settingTitle}>Danger Zone</h2>
           <DangerZoneSettings />
         </Grid>

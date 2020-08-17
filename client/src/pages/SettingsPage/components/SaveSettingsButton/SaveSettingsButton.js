@@ -1,6 +1,6 @@
 import React from "react";
 import useStyles from "./SaveSettingsButton.style";
-import { Button, Tooltip } from "@material-ui/core";
+import { Button, Tooltip, CircularProgress } from "@material-ui/core";
 import { Save } from "@material-ui/icons";
 const SaveSettingsButton = (props) => {
   const classes = useStyles();
@@ -26,7 +26,9 @@ const SaveSettingsButton = (props) => {
             props.disabledOnSave
           }
           variant="outlined"
-          startIcon={<Save />}
+          startIcon={
+            props.disabledOnSave ? <CircularProgress size={22} /> : <Save />
+          }
           size="large"
           onClick={props.onSave}
         >
