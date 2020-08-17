@@ -21,14 +21,9 @@ const SaveSettingsButton = (props) => {
       <span>
         <Button
           color={"primary"}
-          disabled={
-            Boolean(props.restTimeError || props.workTimeError) ||
-            props.disabledOnSave
-          }
+          disabled={props.disabled}
           variant="outlined"
-          startIcon={
-            props.disabledOnSave ? <CircularProgress size={22} /> : <Save />
-          }
+          startIcon={props.saving ? <CircularProgress size={22} /> : <Save />}
           size="large"
           onClick={props.onSave}
         >

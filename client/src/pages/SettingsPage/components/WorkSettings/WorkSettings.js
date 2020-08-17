@@ -103,10 +103,9 @@ const WorkSettings = () => {
         <Grid item xs={12} className={classes.saveContainer}>
           <SaveSettingsButton
             globalError={globalError}
-            restTimeError={restTime.error}
-            workTimeError={workTime.error}
             onSave={handleSave}
-            disabledOnSave={saving}
+            disabled={Boolean(restTime.error || workTime.error) || saving}
+            saving={saving}
           />
         </Grid>
       </Grid>
