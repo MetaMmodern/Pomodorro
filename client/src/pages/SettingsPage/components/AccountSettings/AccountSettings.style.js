@@ -17,6 +17,11 @@ export default makeStyles((theme) => {
     container: {
       padding: theme.spacing(2),
       paddingTop: 0,
+      paddingBottom: 0,
+    },
+    saveContainer: {
+      display: "flex",
+      justifyContent: "flex-end",
     },
   };
 });

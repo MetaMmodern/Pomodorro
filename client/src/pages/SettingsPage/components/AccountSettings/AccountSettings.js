@@ -30,7 +30,7 @@ const AccountSettings = () => {
             <h3>Change password</h3>
             <PasswordSettings classes={classes} />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={classes.saveContainer}>
             <SaveSettingsButton
               globalError={globalError}
               onSave={handleSave}
