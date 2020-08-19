@@ -21,7 +21,9 @@ export default function SettingsPage() {
           <AccountSettings />
         </Grid>
         <Grid item xs={12} md={3} lg={2}>
-          <h2 className={classes.settingTitle}>Danger Zone</h2>
+          <h2 className={`${classes.settingTitle} ${classes.dangerTitle}`}>
+            Danger Zone
+          </h2>
           <DangerZoneSettings />
         </Grid>
       </Grid>
