@@ -20,6 +20,7 @@ const PasswordInput = (props) => {
       value={props.password}
       onChange={props.handlePasswordChange}
       autoComplete="off"
+      className={props.className || ""}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">

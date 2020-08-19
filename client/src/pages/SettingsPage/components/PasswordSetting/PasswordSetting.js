@@ -18,6 +18,7 @@ const PasswordSettings = ({ classes }) => {
             variant="outlined"
             size="small"
             autoComplete="false"
+            className={classes.input}
           />
         </div>
       </Grid>
@@ -31,6 +32,7 @@ const PasswordSettings = ({ classes }) => {
           type="text"
           size="small"
           autocomplete="false"
+          className={classes.input}
         />
       </Grid>
     </Grid>

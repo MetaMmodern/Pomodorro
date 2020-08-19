@@ -11,15 +11,16 @@ export default function SettingsPage() {
   const classes = useStyles();
   return (
     <div className={classes.Settings}>
-      <h2 className={classes.settingTitle}>Work settings</h2>
-      <WorkSettings />
-
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} md={8}>
+        <Grid item xs={12}>
+          <h2 className={classes.settingTitle}>Work settings</h2>
+          <WorkSettings />
+        </Grid>
+        <Grid item xs={12} md={9} lg={10}>
           <h2 className={classes.settingTitle}>Account Settings</h2>
           <AccountSettings />
         </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} md={3} lg={2}>
           <h2 className={classes.settingTitle}>Danger Zone</h2>
           <DangerZoneSettings />
         </Grid>

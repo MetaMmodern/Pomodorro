@@ -23,5 +23,8 @@ export default makeStyles((theme) => {
       display: "flex",
       justifyContent: "flex-end",
     },
+    input: {
+      width: "100%",
+    },
   };
 });

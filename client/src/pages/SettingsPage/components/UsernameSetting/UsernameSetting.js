@@ -15,6 +15,7 @@ const UsernameSetting = ({ classes }) => {
             size="small"
             value={"meta"}
             disabled={true}
+            className={classes.input}
           />
         </div>
       </Grid>
@@ -28,6 +29,7 @@ const UsernameSetting = ({ classes }) => {
           type="text"
           size="small"
           autoComplete="off"
+          className={classes.input}
         />
       </Grid>
     </Grid>

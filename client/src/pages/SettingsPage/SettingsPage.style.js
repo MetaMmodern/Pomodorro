@@ -26,6 +26,7 @@ export default makeStyles((theme) => {
     settingTitle: {
       fontWeight: "400",
       paddingBottom: theme.spacing(2),
+      color: theme.palette.secondary.main,
     },
   };
 });

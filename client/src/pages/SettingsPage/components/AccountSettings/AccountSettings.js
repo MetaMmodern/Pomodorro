@@ -20,26 +20,29 @@ const AccountSettings = () => {
   };
   return (
     <Paper>
-      <form>
-        <Grid container spacing={4} className={classes.container}>
-          <Grid item xs={12} lg={6} className={classes.changeBlock}>
-            <h3>Change username</h3>
-            <UsernameSetting classes={classes} />
-          </Grid>
-          <Grid item xs={12} lg={6} className={classes.changeBlock}>
-            <h3>Change password</h3>
-            <PasswordSettings classes={classes} />
-          </Grid>
-          <Grid item xs={12} className={classes.saveContainer}>
-            <SaveSettingsButton
-              globalError={globalError}
-              onSave={handleSave}
-              disabled={Boolean(globalError.length) || saving}
-              saving={saving}
-            />
-          </Grid>
+      <Grid
+        container
+        spacing={4}
+        className={classes.container}
+        component={"form"}
+      >
+        <Grid item xs={12} lg={6} className={classes.changeBlock}>
+          <h3>Change username</h3>
+          <UsernameSetting classes={classes} />
         </Grid>
-      </form>
+        <Grid item xs={12} lg={6} className={classes.changeBlock}>
+          <h3>Change password</h3>
+          <PasswordSettings classes={classes} />
+        </Grid>
+        <Grid item xs={12} className={classes.saveContainer}>
+          <SaveSettingsButton
+            globalError={globalError}
+            onSave={handleSave}
+            disabled={Boolean(globalError.length) || saving}
+            saving={saving}
+          />
+        </Grid>
+      </Grid>
     </Paper>
   );
 };
