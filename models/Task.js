@@ -8,7 +8,7 @@ const schema = new Schema({
   restTime: { type: Number, default: 5 },
   timeSpent: { type: Number, default: 0 },
   createdDate: { type: Date, default: Date.now },
-  owner: [{ type: Types.ObjectId, ref: "User" }],
+  owner: { type: Types.ObjectId, ref: "User" },
 });
 
 module.exports = model("Task", schema);

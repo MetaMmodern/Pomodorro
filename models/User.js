@@ -5,6 +5,12 @@ const schema = new Schema({
   username: { type: String, unique: true },
   password: { type: String, required: true },
   tasks: [{ type: Types.ObjectId, ref: "Task" }],
+  settings: {
+    workTime: { type: Number },
+    restTime: { type: Number },
+    tickSound: { type: String },
+    finishSound: { type: String },
+  },
 });
 
 module.exports = model("User", schema);

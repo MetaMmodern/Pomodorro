@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import SaveSettingsButton from "../SaveSettingsButton/SaveSettingsButton";
 import TimeBlock from "../TimeBlock/TimeBlock";
 import SoundBlock from "../SoundBlock/SoundBlock";
@@ -6,9 +6,13 @@ import SoundBlock from "../SoundBlock/SoundBlock";
 import { Grid, Paper } from "@material-ui/core";
 
 import useStyles from "./WorkSettings.style";
+import { useHttp } from "../../../../hooks/http.request";
+import { AuthContext } from "../../../../context/auth.context";
 
 const WorkSettings = () => {
   const classes = useStyles();
+  const { loading, request } = useHttp();
+  const { token } = useContext(AuthContext);
 
   const [globalError, setGlobalError] = useState({
     workError: null,
@@ -51,16 +55,23 @@ const WorkSettings = () => {
     });
   }, [workTime, restTime]);
 
-  const [saving, setSaving] = useState(false);
-  const handleSave = () => {
+  const handleSave = async () => {
     setGlobalError(["Saving..."]);
-    setSaving(true);
-    setTimeout(() => {
-      setSaving(false);
-      setGlobalError([]);
-      console.log("saved");
-    }, 2000);
+    console.log(token);
+    const data = await request(
+      "/api/settings/update/work",
+      "POST",
+      {
+        workTime: workTime.value,
+        restTime: restTime.value,
+        tickSound,
+        finishSound,
+      },
+      { Authorization: `Bearer ${token}` }
+    );
+    console.log(data.message);
   };
+
   return (
     <Paper>
       <Grid container spacing={3}>
@@ -104,8 +115,8 @@ const WorkSettings = () => {
           <SaveSettingsButton
             globalError={globalError}
             onSave={handleSave}
-            disabled={Boolean(restTime.error || workTime.error) || saving}
-            saving={saving}
+            disabled={Boolean(restTime.error || workTime.error) || loading}
+            saving={loading}
           />
         </Grid>
       </Grid>

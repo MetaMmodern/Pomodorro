@@ -17,10 +17,13 @@ const PasswordInput = (props) => {
       type={showPassword ? "text" : "password"}
       size={props.size || "small"}
       variant={props.variant || "standard"}
-      value={props.password}
-      onChange={props.handlePasswordChange}
-      autoComplete="off"
+      value={props.value}
+      onChange={props.handleValueChange}
       className={props.className || ""}
+      autoFocus={props?.autoFocus || false}
+      error={props.error}
+      helperText={props.helperText}
+      autoComplete="off"
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">

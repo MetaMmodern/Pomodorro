@@ -1,35 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Grid, TextField } from "@material-ui/core";
-const UsernameSetting = ({ classes }) => {
+import { AuthContext } from "../../../../context/auth.context";
+const UsernameSetting = (props) => {
+  const { username } = useContext(AuthContext);
   return (
     <Grid container spacing={3}>
-      <Grid item xs={5} className={classes.BlockTitle}>
+      <Grid item xs={5} className={props.classes.BlockTitle}>
         <div>Current username:</div>
       </Grid>
       <Grid item xs={7}>
-        <div className={classes.currentUsername}>
+        <div className={props.classes.currentUsername}>
           <TextField
-            id="currentUsername"
             variant="outlined"
             type="text"
             size="small"
-            value={"meta"}
+            value={username}
             disabled={true}
-            className={classes.input}
+            className={props.classes.input}
           />
         </div>
       </Grid>
-      <Grid item xs={5} className={classes.BlockTitle}>
+      <Grid item xs={5} className={props.classes.BlockTitle}>
         <div>New username:</div>
       </Grid>
       <Grid item xs={7}>
         <TextField
-          id="newUsername"
           variant="outlined"
+          value={props.newUsername}
+          onChange={props.setValue}
           type="text"
           size="small"
           autoComplete="off"
-          className={classes.input}
+          className={props.classes.input}
         />
       </Grid>
     </Grid>
