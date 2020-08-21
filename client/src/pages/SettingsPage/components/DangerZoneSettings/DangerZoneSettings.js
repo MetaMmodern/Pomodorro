@@ -15,7 +15,7 @@ const DangerZoneSettings = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogError, setDialogError] = useState(false);
   const [dialogHelperText, setDialogHelperText] = useState("");
-  const { token, logout } = useContext(AuthContext);
+  const { token, logout, setNotification } = useContext(AuthContext);
   const { loading, request } = useHttp();
   const handleSave = async () => {
     switch (action) {
@@ -43,7 +43,8 @@ const DangerZoneSettings = () => {
           Authorization: `Bearer ${token}`,
         }
       );
-      console.log(data);
+      setNotification({ open: true, message: data.message });
+
       setDialogOpen(false);
     } catch (error) {
       setDialogError(true);
@@ -61,7 +62,8 @@ const DangerZoneSettings = () => {
           Authorization: `Bearer ${token}`,
         }
       );
-      console.log(data);
+      setNotification({ open: true, message: data.message });
+
       setDialogOpen(false);
     } catch (error) {
       setDialogError(true);
@@ -79,7 +81,8 @@ const DangerZoneSettings = () => {
           Authorization: `Bearer ${token}`,
         }
       );
-      console.log(data);
+      setNotification({ open: true, message: data.message });
+
       logout();
       history.push("/login");
     } catch (error) {

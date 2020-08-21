@@ -32,7 +32,10 @@ router.post("/update/account", auth, async (request, response) => {
         .json({ message: "Incorrect password", status: 401 });
     }
     user.username = newUsername;
-    user.password = await bcrypt.hash(newPasswd, 12);
+    if (newPasswd.trim() !== "") {
+      user.password = await bcrypt.hash(newPasswd, 12);
+    }
+
     await user.save();
 
     return response.json({ message: "Account settings updated", status: 201 });

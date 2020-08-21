@@ -9,6 +9,7 @@ import PasswordSetting from "../PasswordSetting/PasswordSetting";
 import SubmitDiaolog from "../SubmitDialog/SubmitDiaolog";
 import { AuthContext } from "../../../../context/auth.context";
 import { useHttp } from "../../../../hooks/http.request";
+import Notification from "../../../../components/Notification/Notification";
 const AccountSettings = () => {
   const classes = useStyles();
   const history = useHistory();
@@ -20,7 +21,8 @@ const AccountSettings = () => {
   const [saveDisabled, setSaveDisabled] = useState(false);
   const [submitPasswd, setSubmitPasswd] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
-  const { token, logout } = useContext(AuthContext);
+
+  const { token, logout, setNotification } = useContext(AuthContext);
   const { loading, request } = useHttp();
   const handleDialogOpen = () => {
     setDialogOpen(true);
@@ -29,16 +31,19 @@ const AccountSettings = () => {
   const handleSave = async () => {
     try {
       setSaving(true);
-      console.log(token);
       const data = await request(
         "/api/settings/update/account",
         "POST",
         { newUsername, newPasswd, submitPasswd },
         { Authorization: `Bearer ${token}` }
       );
+      setNotification({
+        open: true,
+        message: data.message,
+      });
       setSaving(false);
       setDialogOpen(false);
-      console.log("saved");
+
       logout();
       history.push("/login");
     } catch (error) {
@@ -87,11 +92,11 @@ const AccountSettings = () => {
         </Grid>
       </Paper>
       <SubmitDiaolog
-        saving={saving}
+        saving={loading}
         value={submitPasswd}
         changeValue={(e) => setSubmitPasswd(e.target.value)}
         text={
-          "You are changing your account settings. Please, confirm your actions by typing your current password below"
+          "You are changing your account settings. Please, confirm your actions by typing your current password below:"
         }
         open={dialogOpen}
         onSubmit={handleSave}

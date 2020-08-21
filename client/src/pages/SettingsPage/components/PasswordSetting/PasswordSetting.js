@@ -37,7 +37,7 @@ const PasswordSettings = (props) => {
     } else {
       props.setSaveDisabled(true);
     }
-  }, [passwordLength, passwordsEqual, props.setSaveDisabled]);
+  }, [passwordLength, passwordsEqual, props]);
   return (
     <Grid container spacing={3}>
       <Grid item xs={5} className={props.classes.BlockTitle}>

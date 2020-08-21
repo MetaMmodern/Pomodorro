@@ -8,11 +8,12 @@ import { Grid, Paper } from "@material-ui/core";
 import useStyles from "./WorkSettings.style";
 import { useHttp } from "../../../../hooks/http.request";
 import { AuthContext } from "../../../../context/auth.context";
+import Notification from "../../../../components/Notification/Notification";
 
 const WorkSettings = () => {
   const classes = useStyles();
   const { loading, request } = useHttp();
-  const { token } = useContext(AuthContext);
+  const { token, setNotification } = useContext(AuthContext);
 
   const [globalError, setGlobalError] = useState({
     workError: null,
@@ -56,20 +57,26 @@ const WorkSettings = () => {
   }, [workTime, restTime]);
 
   const handleSave = async () => {
-    setGlobalError(["Saving..."]);
-    console.log(token);
-    const data = await request(
-      "/api/settings/update/work",
-      "POST",
-      {
-        workTime: workTime.value,
-        restTime: restTime.value,
-        tickSound,
-        finishSound,
-      },
-      { Authorization: `Bearer ${token}` }
-    );
-    console.log(data.message);
+    try {
+      setGlobalError(["Saving..."]);
+      console.log(token);
+      const data = await request(
+        "/api/settings/update/work",
+        "POST",
+        {
+          workTime: workTime.value,
+          restTime: restTime.value,
+          tickSound,
+          finishSound,
+        },
+        { Authorization: `Bearer ${token}` }
+      );
+      setGlobalError([]);
+      setNotification({
+        open: true,
+        message: data.message,
+      });
+    } catch (error) {}
   };
 
   return (

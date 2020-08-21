@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import {
   Dialog,
   DialogTitle,
@@ -8,8 +8,6 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import PasswordInput from "../../../../components/PasswordInput/PasswordInput";
-import { AuthContext } from "../../../../context/auth.context";
-import { useHttp } from "../../../../hooks/http.request";
 
 const SubmitDiaolog = (props) => {
   return (
