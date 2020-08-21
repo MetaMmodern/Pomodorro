@@ -14,6 +14,8 @@ const PasswordInput = (props) => {
   return (
     <TextField
       id={props.id}
+      label={props?.label}
+      required={props?.required || false}
       type={showPassword ? "text" : "password"}
       size={props.size || "small"}
       variant={props.variant || "standard"}
