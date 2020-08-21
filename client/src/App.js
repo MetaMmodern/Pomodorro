@@ -2,11 +2,13 @@ import React from "react";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import Panel from "./components/Panel/Panel";
+import Notification from "./components/Notification/Notification";
 
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthContext } from "./context/auth.context";
 import getRoutes from "./routes";
-import Notification from "./components/Notification/Notification";
+import { connect } from "react-redux";
+import { setConfig } from "./redux/actions/actions";
 
 class App extends React.Component {
   constructor(props) {
@@ -32,20 +34,28 @@ class App extends React.Component {
         userId: data.userId,
         username: data.username,
         isAuth: true,
+        times: data.times,
       };
+      this.props.setConfig(this.state.times);
     }
   }
-  login(jwtToken, id, inUsername) {
+  login(jwtToken, id, inUsername, times) {
     this.setState({
       ...this.state,
       token: jwtToken,
       userId: id,
       username: inUsername,
       isAuth: true,
+      times,
     });
     localStorage.setItem(
       "userData",
-      JSON.stringify({ userId: id, token: jwtToken, username: inUsername })
+      JSON.stringify({
+        userId: id,
+        token: jwtToken,
+        username: inUsername,
+        times,
+      })
     );
   }
   logout() {
@@ -101,4 +111,8 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = {
+  setConfig,
+};
+
+export default connect(null, mapDispatchToProps)(App);

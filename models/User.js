@@ -6,8 +6,8 @@ const schema = new Schema({
   password: { type: String, required: true },
   tasks: [{ type: Types.ObjectId, ref: "Task" }],
   settings: {
-    workTime: { type: Number },
-    restTime: { type: Number },
+    workTime: { type: Number, default: 20 },
+    restTime: { type: Number, default: 5 },
     tickSound: { type: String },
     finishSound: { type: String },
   },

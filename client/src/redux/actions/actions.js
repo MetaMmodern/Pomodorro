@@ -6,6 +6,7 @@ import {
   TOGGLE_PANEL,
   LOG_IN,
   LOG_OUT,
+  UPDATE_CONFIG,
 } from "./actionTypes";
 
 const worker = new Worker("./workers/timer.worker.js");
@@ -104,5 +105,14 @@ export function login(userId, token) {
 export function logout() {
   return {
     type: LOG_OUT,
+  };
+}
+
+// Config
+
+export function setConfig({ timeInMinutes, timeBackInMinutes }) {
+  return {
+    type: UPDATE_CONFIG,
+    payload: { timeInMinutes, timeBackInMinutes },
   };
 }

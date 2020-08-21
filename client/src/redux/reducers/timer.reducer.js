@@ -1,4 +1,5 @@
 import {
+  UPDATE_CONFIG,
   TICK,
   START_TIMER,
   STOP_TIMER,
@@ -20,6 +21,11 @@ const initialState = {
 
 export default function timer(state = initialState, action) {
   switch (action.type) {
+    case UPDATE_CONFIG:
+      return {
+        ...state,
+        ...action.payload,
+      };
     case START_TIMER:
       return {
         ...state,

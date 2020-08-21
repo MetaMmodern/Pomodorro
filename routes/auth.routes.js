@@ -39,6 +39,7 @@ router.post(
         email,
         username,
         password: hashedpasswd,
+        settings: {},
       });
       await user.save();
       return response.status(201).json({ message: "User created" });
@@ -86,6 +87,10 @@ router.post(
         token,
         userId: user.id,
         username: user.username ? user.username : user.email,
+        times: {
+          timeInMinutes: user.settings.workTime,
+          timeBackInMinutes: user.settings.restTime,
+        },
       });
     } catch (error) {
       console.log(error);
