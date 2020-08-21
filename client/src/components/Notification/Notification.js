@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { Snackbar, Button, IconButton } from "@material-ui/core";
+import { Snackbar, IconButton } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 
 export class Notification extends Component {

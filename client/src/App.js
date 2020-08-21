@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import Panel from "./components/Panel/Panel";

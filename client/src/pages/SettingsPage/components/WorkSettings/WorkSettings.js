@@ -8,7 +8,6 @@ import { Grid, Paper } from "@material-ui/core";
 import useStyles from "./WorkSettings.style";
 import { useHttp } from "../../../../hooks/http.request";
 import { AuthContext } from "../../../../context/auth.context";
-import Notification from "../../../../components/Notification/Notification";
 
 const WorkSettings = () => {
   const classes = useStyles();

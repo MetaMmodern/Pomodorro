@@ -14,8 +14,10 @@ const PasswordInput = (props) => {
   return (
     <TextField
       id={props.id}
+      label={props?.label}
+      required={props?.required || false}
       type={showPassword ? "text" : "password"}
-      size={props.size || "small"}
+      size={props.size || "medium"}
       variant={props.variant || "standard"}
       value={props.value}
       onChange={props.handleValueChange}
@@ -23,7 +25,7 @@ const PasswordInput = (props) => {
       autoFocus={props?.autoFocus || false}
       error={props.error}
       helperText={props.helperText}
-      autoComplete="off"
+      autoComplete={props?.autoComplete || "off"}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">

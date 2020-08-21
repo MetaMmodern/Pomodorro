@@ -6,6 +6,7 @@ import { useHttp } from "../../hooks/http.request";
 import { Alert, AlertTitle } from "@material-ui/lab";
 
 import useStyles from "./LoginPage.style";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
 
 export default function LoginPage(props) {
   const history = useHistory();
@@ -53,16 +54,20 @@ export default function LoginPage(props) {
           onChange={handleFormChange}
           autoComplete="true"
         />
-        <TextField
+
+        <PasswordInput
           id="current-password"
           label="Password"
-          type="password"
-          required={true}
-          value={state.password}
+          variant="standard"
+          autoComplete="off"
+          size="medium"
           className={classes.AuthBlock__input}
-          onChange={handleFormChange}
+          value={state.password}
+          handleValueChange={handleFormChange}
+          required={true}
           autoComplete="true"
         />
+
         {error && (
           <Alert severity="error" className={classes.AuthBlock__Alert}>
             <AlertTitle>Error</AlertTitle>

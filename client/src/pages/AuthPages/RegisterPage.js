@@ -5,6 +5,7 @@ import Alert from "@material-ui/lab/Alert";
 import { useHttp } from "../../hooks/http.request";
 
 import useStyles from "./RegisterPage.style";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
 
 export default function RegisterPage() {
   const history = useHistory();
@@ -88,28 +89,32 @@ export default function RegisterPage() {
           value={state.username}
           onChange={handleFormChange}
         />
-
-        <TextField
-          id="new-password"
+        <PasswordInput
+          id={"new-password"}
           label="Password"
-          type="password"
-          required={true}
+          variant="standard"
+          size="medium"
+          autoComplete="off"
           className={classes.AuthBlock__input}
           value={state.password}
-          onChange={handleFormChange}
+          handleValueChange={handleFormChange}
           error={!passwordLength}
           helperText={!passwordLength && "Password is too short."}
+          required={true}
         />
-        <TextField
+
+        <PasswordInput
           id="new-password-confirm"
           label="Confirm password"
-          type="password"
-          required={true}
+          variant="standard"
+          size="medium"
+          autoComplete="off"
           className={classes.AuthBlock__input}
           value={state.passwordConfirmed}
-          onChange={handleFormChange}
+          handleValueChange={handleFormChange}
           error={!passwordsEqual}
           helperText={!passwordsEqual && "Password do not match"}
+          required={true}
         />
 
         <div>reCaptcha goes here</div>
