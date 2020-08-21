@@ -7,8 +7,6 @@ import Notification from "./components/Notification/Notification";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthContext } from "./context/auth.context";
 import getRoutes from "./routes";
-import { connect } from "react-redux";
-import { setConfig } from "./redux/actions/actions";
 
 class App extends React.Component {
   constructor(props) {
@@ -34,19 +32,16 @@ class App extends React.Component {
         userId: data.userId,
         username: data.username,
         isAuth: true,
-        times: data.times,
       };
-      this.props.setConfig(this.state.times);
     }
   }
-  login(jwtToken, id, inUsername, times) {
+  login(jwtToken, id, inUsername) {
     this.setState({
       ...this.state,
       token: jwtToken,
       userId: id,
       username: inUsername,
       isAuth: true,
-      times,
     });
     localStorage.setItem(
       "userData",
@@ -54,7 +49,6 @@ class App extends React.Component {
         userId: id,
         token: jwtToken,
         username: inUsername,
-        times,
       })
     );
   }
@@ -111,8 +105,4 @@ class App extends React.Component {
   }
 }
 
-const mapDispatchToProps = {
-  setConfig,
-};
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;

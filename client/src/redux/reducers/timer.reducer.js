@@ -22,6 +22,7 @@ const initialState = {
 export default function timer(state = initialState, action) {
   switch (action.type) {
     case UPDATE_CONFIG:
+      console.log("Update config worked");
       return {
         ...state,
         ...action.payload,

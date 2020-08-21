@@ -4,6 +4,7 @@ const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const User = require("../models/User");
+const auth = require("../middleware/auth.middleware");
 
 const router = Router();
 router.post(
@@ -101,5 +102,21 @@ router.post(
     // eslint-disable-next-line comma-dangle
   }
 );
+
+router.get("/config", auth, async (request, response) => {
+  try {
+    const user = await User.findById(request.user.userId);
+    console.log(user.settings);
+    return response.json({
+      workTime: user.settings.workTime,
+      restTime: user.settings.restTime,
+    });
+  } catch (error) {
+    console.log(error);
+    return response
+      .status(500)
+      .json({ message: "Error, try again", code: error });
+  }
+});
 
 module.exports = router;

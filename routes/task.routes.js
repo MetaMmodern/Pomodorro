@@ -20,8 +20,8 @@ router.post("/create", auth, async (request, response) => {
     const task = new Task({
       name: request.body.name,
       tomatosToFinish: request.body.tomatosToFinish || 0,
-      workingTime: request.body.workingTime || 0,
-      restTime: request.body.restTime || 0,
+      workingTime: request.body.workingTime || 20,
+      restTime: request.body.restTime || 5,
       owner: request.user.userId,
     });
     await task.save();

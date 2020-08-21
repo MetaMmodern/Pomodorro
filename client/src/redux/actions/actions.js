@@ -111,6 +111,7 @@ export function logout() {
 // Config
 
 export function setConfig({ timeInMinutes, timeBackInMinutes }) {
+  console.log("set config worked");
   return {
     type: UPDATE_CONFIG,
     payload: { timeInMinutes, timeBackInMinutes },
