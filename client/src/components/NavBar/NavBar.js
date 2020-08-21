@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -9,17 +9,37 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import { connect } from "react-redux";
 import { togglePanel } from "../../redux/actions/actions";
-import { Link } from "react-router-dom";
-import { ExitToApp } from "@material-ui/icons";
-import { AuthContext } from "../../context/auth.context";
+import { Link, withRouter } from "react-router-dom";
 import { Account } from "../Account/Account";
 
 import useStyles from "./NavBar.style";
 
 function NavBar(props) {
-  const { logout } = useContext(AuthContext);
-
+  const [title, setTitle] = useState("Timer");
   const classes = useStyles();
+  useEffect(() => {
+    switch (props.location.pathname.slice(1)) {
+      case "":
+        setTitle("Timer");
+        break;
+      case "tasks":
+        setTitle("Tasks");
+        break;
+      case "settings":
+        setTitle("Settings");
+        break;
+      case "login":
+        setTitle("Login");
+        break;
+      case "register":
+        setTitle("Registration");
+        break;
+      default:
+        setTitle("Timer");
+
+        break;
+    }
+  }, [props.location.pathname]);
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
@@ -34,14 +54,11 @@ function NavBar(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Timer
+            {title}
           </Typography>
           {props.isLogged ? (
             <>
               <Account username={props.username} />
-              <IconButton color="inherit" onClick={logout}>
-                <ExitToApp />
-              </IconButton>
             </>
           ) : (
             <>
@@ -60,4 +77,4 @@ const mapDispatchToProps = {
   togglePanel,
 };
 
-export default connect(null, mapDispatchToProps)(NavBar);
+export default connect(null, mapDispatchToProps)(withRouter(NavBar));

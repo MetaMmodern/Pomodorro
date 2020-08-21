@@ -9,6 +9,7 @@ app.use(express.json({ extended: true }));
 
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/tasks", require("./routes/task.routes"));
+app.use("/api/settings", require("./routes/settings.routes"));
 
 async function start() {
   try {

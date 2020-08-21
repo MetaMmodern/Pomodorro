@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/auth.context";
 
 import useStyles from "./TasksPage.style";
 
-export default function TasksPage(props) {
+export default function TasksPage() {
   const classes = useStyles();
   const [tasks, setTasks] = useState([]);
   const { loading, request } = useHttp();

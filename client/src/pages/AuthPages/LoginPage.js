@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { TextField, Button, Paper } from "@material-ui/core";
 import { AuthContext } from "../../context/auth.context";
 import { useHttp } from "../../hooks/http.request";
@@ -8,6 +8,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import useStyles from "./LoginPage.style";
 
 export default function LoginPage(props) {
+  const history = useHistory();
   const { login } = useContext(AuthContext);
   const [state, setState] = useState({ email: "", password: "" });
   const { request, error } = useHttp();
@@ -36,6 +37,7 @@ export default function LoginPage(props) {
       );
       console.log("got this data:", data);
       login(data.token, data.userId, data.username);
+      history.push("/");
     } catch (error) {}
   };
   return (

@@ -40,8 +40,12 @@ export default function TaskAdder(props) {
         },
         { authorization: `Bearer ${token}` }
       );
-      console.log(data.status === 201);
-      props.updateTasks();
+      if (data.status === 201) {
+        setTask("");
+        setTasklength(true);
+
+        props.updateTasks();
+      }
     } catch (error) {}
   };
   const handleEnter = (e) => {
@@ -52,7 +56,7 @@ export default function TaskAdder(props) {
   };
   return (
     <div className={classes.TaskAdder}>
-      <form action="none" style={{ display: "flex", alignItems: "center" }}>
+      <form action="none">
         {tasklength ? (
           <TextField
             label="Task name"
