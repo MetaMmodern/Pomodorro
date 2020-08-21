@@ -9,7 +9,7 @@ import PasswordSetting from "../PasswordSetting/PasswordSetting";
 import SubmitDiaolog from "../SubmitDialog/SubmitDiaolog";
 import { AuthContext } from "../../../../context/auth.context";
 import { useHttp } from "../../../../hooks/http.request";
-import Notification from "../../../../components/Notification/Notification";
+
 const AccountSettings = () => {
   const classes = useStyles();
   const history = useHistory();
