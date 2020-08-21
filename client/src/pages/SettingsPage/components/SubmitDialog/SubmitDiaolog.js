@@ -27,7 +27,7 @@ const SubmitDiaolog = (props) => {
           value={props.value}
           handleValueChange={props.changeValue}
           error={props.error}
-          helperText={props.error ? "Invalid password" : ""}
+          helperText={props.helperText || props.error ? "Invalid password" : ""}
           autoFocus
           id="passwdsubmit"
           variant="outlined"
@@ -47,7 +47,7 @@ const SubmitDiaolog = (props) => {
         <Button
           onClick={props.onSubmit}
           color="primary"
-          disabled={props.loading}
+          disabled={props.saving}
         >
           Submit
         </Button>

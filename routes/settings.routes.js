@@ -43,48 +43,52 @@ router.post("/update/account", auth, async (request, response) => {
       .json({ message: "Error, try again later", code: error });
   }
 });
-router.get("/delete/progress", auth, async (request, response) => {
-  try {
-    const task = new Task({
-      name: request.body.name,
-      tomatosToFinish: request.body.tomatosToFinish || 0,
-      workingTime: request.body.workingTime || 0,
-      restTime: request.body.restTime || 0,
-      owner: request.user.userId,
-    });
+
+async function deleteProgress(user) {
+  user.tasks.forEach(async (taskId) => {
+    const task = await Task.findById(taskId);
+    task.tomatosFinished = 0;
+    task.timeSpent = 0;
     await task.save();
-    const user = await User.findById(request.user.userId);
-    user.tasks.unshift(task);
-    await user.save();
-    response.json({ message: "Made new toDo", status: 201 });
-  } catch (error) {
-    console.log(error);
-    return response
-      .status(500)
-      .json({ message: "Error, try again", code: error });
-  }
-});
+  });
+  await user.save();
+  return { message: "All progress cleared", status: 200 };
+}
+async function deleteTasks(user) {
+  user.tasks.forEach(async ({ _id }) => {
+    const task = await Task.findByIdAndDelete(_id);
+    await task.save();
+  });
+  user.tasks = [];
+  await user.save();
+  return { message: "All tasks deleted", status: 200 };
+}
+async function deleteAccount(user) {
+  await deleteTasks(user);
+  await user.deleteOne();
+  return { message: "Acount deleted", status: 200 };
+}
 
-router.get("/delete/tasks", auth, async (request, response) => {
+router.post("/delete/:whatToDelete", auth, async (request, response) => {
   try {
     const user = await User.findById(request.user.userId);
-    user.tasks.forEach((tasks) => {
-      // TODO
-      console.log(task);
-    });
-    return response.status(200).json({ message: "Tasks deleted" });
-  } catch (error) {
-    console.log(error);
-    return response
-      .status(500)
-      .json({ message: "Error, try again", code: error });
-  }
-});
-
-router.post("/delete/account", async (request, response) => {
-  try {
-    const task = await Task.findById(request.params.id);
-    return response.json({ ...task, owner: null });
+    const { submitPasswd } = request.body;
+    const isMatch = await bcrypt.compare(submitPasswd, user.password);
+    if (!isMatch) {
+      return response
+        .status(401)
+        .json({ message: "Incorrect password", status: 401 });
+    }
+    switch (request.params.whatToDelete) {
+      case "progress":
+        return response.status(200).json(await deleteProgress(user));
+      case "tasks":
+        return response.status(200).json(await deleteTasks(user));
+      case "account":
+        return response.status(200).json(await deleteAccount(user));
+      default:
+        break;
+    }
   } catch (error) {
     console.log(error);
     return response
