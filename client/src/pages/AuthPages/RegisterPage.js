@@ -93,7 +93,7 @@ export default function RegisterPage() {
           id={"new-password"}
           label="Password"
           variant="standard"
-          size="small"
+          size="medium"
           autoComplete="off"
           className={classes.AuthBlock__input}
           value={state.password}
@@ -107,7 +107,7 @@ export default function RegisterPage() {
           id="new-password-confirm"
           label="Confirm password"
           variant="standard"
-          size="small"
+          size="medium"
           autoComplete="off"
           className={classes.AuthBlock__input}
           value={state.passwordConfirmed}
