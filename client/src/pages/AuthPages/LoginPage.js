@@ -59,7 +59,6 @@ export default function LoginPage(props) {
           id="current-password"
           label="Password"
           variant="standard"
-          autoComplete="off"
           size="medium"
           className={classes.AuthBlock__input}
           value={state.password}

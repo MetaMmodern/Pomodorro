@@ -1,24 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
+import { connect } from "react-redux";
 import {
   Select,
   FormControl,
   MenuItem,
   FormHelperText,
 } from "@material-ui/core";
-import { useEffect } from "react";
-import { useCallback } from "react";
 import { useHttp } from "../../hooks/http.request";
-import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 
+import { setConfig } from "../../redux/actions/actions";
+
 import useStyles from "./TaskSelector.style";
-export default function TaskSelector(props) {
+
+function TaskSelector(props) {
   const { token } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [task, setTask] = useState({ name: "", id: "" });
   const { request, loading } = useHttp();
   const classes = useStyles();
   const handleChange = ({ name, id }) => {
+    const task = tasks.filter((task) => {
+      return task[1]._id === id;
+    })[0];
+    props.setConfig({
+      timeInMinutes: task[1].workingTime,
+      timeBackInMinutes: task[1].restTime,
+    });
+
     setTask({ name, id });
   };
   const fetchTasks = useCallback(async () => {
@@ -53,9 +62,9 @@ export default function TaskSelector(props) {
     <FormControl className={classes.formControl}>
       <Select
         value={task.name}
-        onChange={(e) =>
-          handleChange({ name: e.target.value, id: e.target.id })
-        }
+        onChange={(_, child) => {
+          handleChange({ name: child.props.value, id: child.props.id });
+        }}
         displayEmpty
         className={classes.selectEmpty}
         inputProps={{ "aria-label": "Select Task" }}
@@ -65,7 +74,12 @@ export default function TaskSelector(props) {
         </MenuItem>
         {tasks.map(([_, task]) => {
           return (
-            <MenuItem value={task.name} key={task["_id"]} id={task["_id"]}>
+            <MenuItem
+              value={task.name}
+              key={task._id}
+              id={task._id}
+              name={task.name}
+            >
               {task.name}
             </MenuItem>
           );
@@ -75,3 +89,9 @@ export default function TaskSelector(props) {
     </FormControl>
   );
 }
+
+const mapDispatchToProps = {
+  setConfig,
+};
+
+export default connect(null, mapDispatchToProps)(TaskSelector);

@@ -59,7 +59,11 @@ export default function Task(props) {
               <Link
                 to={{
                   pathname: "/",
-                  taskProp: { currentTask: props.text, id: props.id },
+                  taskProp: {
+                    currentTask: props.text,
+                    id: props.id,
+                    time: props.time,
+                  },
                 }}
               >
                 <IconButton>
