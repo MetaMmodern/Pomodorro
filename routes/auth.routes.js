@@ -59,7 +59,7 @@ router.post(
   async (request, response) => {
     try {
       const errors = validationResult(request);
-      //here goes some code
+
       if (!errors.isEmpty()) {
         return response.status(401).json({
           errors: errors.array(),
@@ -86,7 +86,6 @@ router.post(
       );
       response.cookie("token", token, { httpOnly: true });
       return response.json({
-        token,
         userId: user.id,
         username: user.username ? user.username : user.email,
         times: {

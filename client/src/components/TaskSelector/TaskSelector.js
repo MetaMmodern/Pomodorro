@@ -14,7 +14,7 @@ import { setConfig } from "../../redux/actions/actions";
 import useStyles from "./TaskSelector.style";
 
 function TaskSelector(props) {
-  const { username } = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [task, setTask] = useState({ name: "", id: "" });
   const { request, loading } = useHttp();
@@ -35,7 +35,7 @@ function TaskSelector(props) {
     setTasks(Object.entries(data));
   }, [request, setTasks]);
   useEffect(() => {
-    if (username) {
+    if (userId) {
       fetchTasks();
     }
   }, [fetchTasks]);
@@ -51,7 +51,7 @@ function TaskSelector(props) {
     }
   }, [props.selectedTask]);
 
-  if (!username) {
+  if (!userId) {
     return <></>;
   }
   return loading ? (

@@ -37,7 +37,7 @@ export default function LoginPage(props) {
         {}
       );
       console.log("got this data:", data);
-      login(data.userId, data.username, data.times);
+      login(data.userId, data.username);
       history.push("/");
     } catch (error) {}
   };
