@@ -5,15 +5,50 @@ module.exports = (request, response, next) => {
     next();
   }
   try {
-    const token = request.cookies.token;
-    if (!token) {
+    const access_token = request.cookies.access_token;
+    if (!access_token) {
       return response
         .status(401)
         .json({ message: "Not authorized", headers: request.headers });
     }
-    const decoded = jwt.verify(token, config.get("jwtSecret"));
-    request.user = decoded;
-    next();
+    jwt.verify(access_token, config.get("jwtSecret"), (err, decoded) => {
+      if (err) {
+        if (err.name === "TokenExpiredError") {
+          const refresh_token = request.cookies.refresh_token;
+          jwt.verify(refresh_token, config.get("jwtSecret"), function (
+            err,
+            decoded
+          ) {
+            if (!err) {
+              const userId = decoded.userId;
+              const newAccess = jwt.sign(
+                {
+                  userId,
+                },
+                config.get("jwtSecret"),
+                { expiresIn: "1 min" }
+              );
+              const newRefresh = jwt.sign(
+                {
+                  userId,
+                },
+                config.get("jwtSecret"),
+                { expiresIn: "5 min" }
+              );
+              response.cookie("access_token", newAccess, { httpOnly: true });
+              response.cookie("refresh_token", newRefresh, { httpOnly: true });
+              request.user = decoded;
+              next();
+            } else {
+              throw new Error(err);
+            }
+          });
+        }
+      } else {
+        request.user = decoded;
+        next();
+      }
+    });
   } catch (error) {
     console.log(error);
     return response.status(401).json({ message: "Not authorized" });

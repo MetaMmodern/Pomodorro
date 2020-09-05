@@ -77,14 +77,22 @@ router.post(
       if (!isMatch) {
         return response.status(401).json({ message: "Incorrect password" });
       }
-      const token = jwt.sign(
+      const access_token = jwt.sign(
         {
           userId: user.id,
         },
         config.get("jwtSecret"),
-        { expiresIn: "1h" }
+        { expiresIn: "1 min" }
       );
-      response.cookie("token", token, { httpOnly: true });
+      const refresh_token = jwt.sign(
+        {
+          userId: user.id,
+        },
+        config.get("jwtSecret"),
+        { expiresIn: "5 min" }
+      );
+      response.cookie("access_token", access_token, { httpOnly: true });
+      response.cookie("refresh_token", refresh_token, { httpOnly: true });
       return response.json({
         userId: user.id,
         username: user.username ? user.username : user.email,
