@@ -14,7 +14,7 @@ import { setConfig } from "../../redux/actions/actions";
 import useStyles from "./TaskSelector.style";
 
 function TaskSelector(props) {
-  const { token } = useContext(AuthContext);
+  const { username } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [task, setTask] = useState({ name: "", id: "" });
   const { request, loading } = useHttp();
@@ -31,16 +31,14 @@ function TaskSelector(props) {
     setTask({ name, id });
   };
   const fetchTasks = useCallback(async () => {
-    const data = await request("/api/tasks/", "GET", null, {
-      Authorization: `Bearer ${token}`,
-    });
+    const data = await request("/api/tasks/", "GET", null, {});
     setTasks(Object.entries(data));
-  }, [request, setTasks, token]);
+  }, [request, setTasks]);
   useEffect(() => {
-    if (token) {
+    if (username) {
       fetchTasks();
     }
-  }, [fetchTasks, token]);
+  }, [fetchTasks]);
   useEffect(() => {
     if (
       props.selectedTask !== undefined &&
@@ -53,7 +51,7 @@ function TaskSelector(props) {
     }
   }, [props.selectedTask]);
 
-  if (!token) {
+  if (!username) {
     return <></>;
   }
   return loading ? (

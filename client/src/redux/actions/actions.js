@@ -95,10 +95,10 @@ export function togglePanel(event) {
 
 // Auth
 
-export function login(userId, token) {
+export function login(userId) {
   return {
     type: LOG_IN,
-    payload: { userId, token },
+    payload: { userId },
   };
 }
 

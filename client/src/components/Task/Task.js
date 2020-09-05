@@ -11,12 +11,10 @@ import useStyles from "./Task.style";
 export default function Task(props) {
   const classes = useStyles();
   const { request } = useHttp();
-  const { token } = useContext(AuthContext);
+
   const deleteTask = async () => {
     try {
-      await request(`/api/tasks/delete/${props.id}/`, "GET", null, {
-        Authorization: `Bearer ${token}`,
-      });
+      await request(`/api/tasks/delete/${props.id}/`, "GET", null, {});
       await props.updateTasks();
     } catch (error) {}
   };

@@ -12,7 +12,7 @@ import { AuthContext } from "../../../../context/auth.context";
 const WorkSettings = () => {
   const classes = useStyles();
   const { loading, request } = useHttp();
-  const { token, setNotification } = useContext(AuthContext);
+  const { setNotification } = useContext(AuthContext);
 
   const [globalError, setGlobalError] = useState({
     workError: null,
@@ -58,7 +58,6 @@ const WorkSettings = () => {
   const handleSave = async () => {
     try {
       setGlobalError(["Saving..."]);
-      console.log(token);
       const data = await request(
         "/api/settings/update/work",
         "POST",
@@ -68,7 +67,7 @@ const WorkSettings = () => {
           tickSound,
           finishSound,
         },
-        { Authorization: `Bearer ${token}` }
+        {}
       );
       setGlobalError([]);
       setNotification({
