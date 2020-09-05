@@ -5,7 +5,7 @@ module.exports = (request, response, next) => {
     next();
   }
   try {
-    const token = request.headers.authorization.split(" ")[1]; // "Bearer TOKEN"
+    const token = request.cookies.token;
     if (!token) {
       return response
         .status(401)

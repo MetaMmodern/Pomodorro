@@ -84,6 +84,7 @@ router.post(
         config.get("jwtSecret"),
         { expiresIn: "1h" }
       );
+      response.cookie("token", token, { httpOnly: true });
       return response.json({
         token,
         userId: user.id,
