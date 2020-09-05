@@ -26,14 +26,14 @@ module.exports = (request, response, next) => {
                   userId,
                 },
                 config.get("jwtSecret"),
-                { expiresIn: "1 min" }
+                { expiresIn: "10 min" }
               );
               const newRefresh = jwt.sign(
                 {
                   userId,
                 },
                 config.get("jwtSecret"),
-                { expiresIn: "5 min" }
+                { expiresIn: "7d" }
               );
               response.cookie("access_token", newAccess, { httpOnly: true });
               response.cookie("refresh_token", newRefresh, { httpOnly: true });
