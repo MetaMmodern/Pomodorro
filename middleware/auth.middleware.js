@@ -26,20 +26,21 @@ module.exports = (request, response, next) => {
                   userId,
                 },
                 config.get("jwtSecret"),
-                { expiresIn: "10 min" }
+                { expiresIn: "1 min" }
               );
               const newRefresh = jwt.sign(
                 {
                   userId,
                 },
                 config.get("jwtSecret"),
-                { expiresIn: "7d" }
+                { expiresIn: "3 min" }
               );
               response.cookie("access_token", newAccess, { httpOnly: true });
               response.cookie("refresh_token", newRefresh, { httpOnly: true });
               request.user = decoded;
               next();
             } else {
+              console.log("so the refresh is dead ");
               throw new Error(err);
             }
           });
@@ -50,7 +51,7 @@ module.exports = (request, response, next) => {
       }
     });
   } catch (error) {
-    console.log(error);
-    return response.status(401).json({ message: "Not authorized" });
+    // console.log(error);
+    return response.status(403).json({ message: "Not authorized" });
   }
 };

@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+  useRef,
+} from "react";
 import { connect } from "react-redux";
 import {
   Select,
@@ -7,6 +13,7 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import { useHttp } from "../../hooks/http.request";
+import { useIsMountedRef } from "../../hooks/isMounted";
 import { AuthContext } from "../../context/auth.context";
 
 import { setConfig } from "../../redux/actions/actions";
@@ -14,6 +21,7 @@ import { setConfig } from "../../redux/actions/actions";
 import useStyles from "./TaskSelector.style";
 
 function TaskSelector(props) {
+  const isMountedRef = useIsMountedRef();
   const { userId } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [task, setTask] = useState({ name: "", id: "" });
@@ -35,14 +43,24 @@ function TaskSelector(props) {
     setTasks(Object.entries(data));
   }, [request, setTasks]);
   useEffect(() => {
+    isMountedRef.current = true;
     if (userId) {
+      async function fetchTasks() {
+        const data = await request("/api/tasks/", "GET", null, {});
+        if (isMountedRef.current) {
+          setTasks(Object.entries(data));
+        }
+      }
       fetchTasks();
     }
-  }, [fetchTasks]);
+  }, [fetchTasks, userId, request]);
   useEffect(() => {
+    isMountedRef.current = true;
+
     if (
       props.selectedTask !== undefined &&
-      props.selectedTask.id !== undefined
+      props.selectedTask.id !== undefined &&
+      isMountedRef.current
     ) {
       setTask({
         name: props.selectedTask.currentTask,

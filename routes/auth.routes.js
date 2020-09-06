@@ -82,14 +82,14 @@ router.post(
           userId: user.id,
         },
         config.get("jwtSecret"),
-        { expiresIn: "10 min" }
+        { expiresIn: "1 min" }
       );
       const refresh_token = jwt.sign(
         {
           userId: user.id,
         },
         config.get("jwtSecret"),
-        { expiresIn: "7d" }
+        { expiresIn: "3 min" }
       );
       response.cookie("access_token", access_token, { httpOnly: true });
       response.cookie("refresh_token", refresh_token, { httpOnly: true });

@@ -55,6 +55,7 @@ class App extends React.Component {
       username: null,
       isAuth: false,
     });
+    localStorage.removeItem("userData");
   }
   setNotification(notification) {
     this.setState({

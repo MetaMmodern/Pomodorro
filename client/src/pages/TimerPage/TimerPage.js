@@ -32,7 +32,7 @@ function TimerSection(props) {
       }
       getConfig();
     }
-  }, [props, request, setNotification]);
+  }, [props, request, setNotification, userId]);
   return (
     <div className={classes.timerSection}>
       <div>
