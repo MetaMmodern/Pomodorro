@@ -5,6 +5,19 @@ const User = require("../models/User");
 const router = Router();
 const auth = require("../middleware/auth.middleware");
 
+router.get("/settings", auth, async (request, response) => {
+  try {
+    const user = await User.findById(request.user.userId);
+
+    return response.json({ settings: user.settings, status: 200 });
+  } catch (error) {
+    console.log(error);
+    return response
+      .status(500)
+      .json({ message: "Error, try again later", code: error });
+  }
+});
+
 router.post("/update/work", auth, async (request, response) => {
   try {
     const user = await User.findById(request.user.userId);

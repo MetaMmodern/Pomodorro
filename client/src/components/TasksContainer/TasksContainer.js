@@ -16,7 +16,6 @@ export default function TasksContainer({ tasks, updateTasks }) {
         justify="flex-start"
       >
         {tasks.map((task) => {
-          console.log(task);
           return (
             <Task
               text={task[1].name}

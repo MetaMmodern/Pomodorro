@@ -7,6 +7,7 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import { useHttp } from "../../hooks/http.request";
+import { useIsMountedRef } from "../../hooks/isMounted";
 import { AuthContext } from "../../context/auth.context";
 
 import { setConfig } from "../../redux/actions/actions";
@@ -14,7 +15,8 @@ import { setConfig } from "../../redux/actions/actions";
 import useStyles from "./TaskSelector.style";
 
 function TaskSelector(props) {
-  const { token } = useContext(AuthContext);
+  const isMountedRef = useIsMountedRef();
+  const { userId } = useContext(AuthContext);
   const [tasks, setTasks] = useState([]);
   const [task, setTask] = useState({ name: "", id: "" });
   const { request, loading } = useHttp();
@@ -31,29 +33,37 @@ function TaskSelector(props) {
     setTask({ name, id });
   };
   const fetchTasks = useCallback(async () => {
-    const data = await request("/api/tasks/", "GET", null, {
-      Authorization: `Bearer ${token}`,
-    });
+    const data = await request("/api/tasks/", "GET", null, {});
     setTasks(Object.entries(data));
-  }, [request, setTasks, token]);
+  }, [request, setTasks]);
   useEffect(() => {
-    if (token) {
+    isMountedRef.current = true;
+    if (userId) {
+      async function fetchTasks() {
+        const data = await request("/api/tasks/", "GET", null, {});
+        if (isMountedRef.current) {
+          setTasks(Object.entries(data));
+        }
+      }
       fetchTasks();
     }
-  }, [fetchTasks, token]);
+  }, [fetchTasks, userId, request, isMountedRef]);
   useEffect(() => {
+    isMountedRef.current = true;
+
     if (
       props.selectedTask !== undefined &&
-      props.selectedTask.id !== undefined
+      props.selectedTask.id !== undefined &&
+      isMountedRef.current
     ) {
       setTask({
         name: props.selectedTask.currentTask,
         id: props.selectedTask.id,
       });
     }
-  }, [props.selectedTask]);
+  }, [props.selectedTask, isMountedRef]);
 
-  if (!token) {
+  if (!userId) {
     return <></>;
   }
   return loading ? (

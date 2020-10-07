@@ -10,7 +10,7 @@ import { useHttp } from "../../hooks/http.request";
 
 function TimerSection(props) {
   const classes = useStyles();
-  const { token, setNotification } = useContext(AuthContext);
+  const { userId, setNotification } = useContext(AuthContext);
   const { request } = useHttp();
   useEffect(() => {
     if (props?.location?.taskProp) {
@@ -18,13 +18,10 @@ function TimerSection(props) {
         timeInMinutes: props.location.taskProp.time.workTime,
         timeBackInMinutes: props.location.taskProp.time.restTime,
       });
-    } else if (token) {
+    } else if (userId) {
       async function getConfig() {
         try {
-          const data = await request("api/auth/config", "GET", null, {
-            Authorization: `Bearer ${token}`,
-          });
-          console.log(data);
+          const data = await request("api/auth/config", "GET", null, {});
           props.setConfig({
             timeInMinutes: data.workTime,
             timeBackInMinutes: data.restTime,
@@ -35,7 +32,7 @@ function TimerSection(props) {
       }
       getConfig();
     }
-  }, [props, request, setNotification, token]);
+  }, [props, request, setNotification, userId]);
   return (
     <div className={classes.timerSection}>
       <div>

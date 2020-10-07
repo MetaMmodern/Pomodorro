@@ -2,9 +2,11 @@
 
 This is a Pomodorro timer Application project.
 
-## What is the goal?
+## Main idea
 
-This application is made for better productivity in your everyday coding/programming/computer life. It uses the Pomodorro 🍅 technique: **work hard for 20 minutes and then have a 5 minute rest. Then repeat.** Currently it supports next features:
+This application is made for better productivity in your everyday coding/programming/computer life. It uses the Pomodorro 🍅 technique: **work hard for 20 minutes and then have a 5 minute rest. Then repeat.**
+
+## Currently supported features
 
 - running timer(default work time: 20 minutes, rest time: 5 minutes)
 - Creating an account with username
@@ -19,7 +21,7 @@ This application is made for better productivity in your everyday coding/program
 
 The application is fully responsive: you can use it both on mobile and on tablet or PC.
 
-### Used tecknologies:
+## Used technologies
 
 - React
 - Redux
@@ -29,14 +31,12 @@ The application is fully responsive: you can use it both on mobile and on tablet
 - MongoDB Atlas
 - Deployed on Heroku
 
-### Current issues are:
+## Current issues
 
-- authentication is made with 1 token, so it does not auto refresh and throws errors.
-  - Temporary solution: clear localStorage when you get an error.
 - no sound is provided in timer
 - The tasks page is a little bit ugly
 - No reCaptcha is made on registration or login page
 
 Feel free to create issues and notify me about new problems.
 
-The application is available [here](https://evening-mesa-44346.herokuapp.com/) (be patient, Heroku may load it very late)
+The application is available [here](https://**evening**-mesa-44346.herokuapp.com/) (be patient, Heroku may load it very late)

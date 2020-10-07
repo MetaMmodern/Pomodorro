@@ -9,6 +9,7 @@ import { Grid } from "@material-ui/core";
 
 export default function SettingsPage() {
   const classes = useStyles();
+
   return (
     <div className={classes.Settings}>
       <Grid container spacing={3}>

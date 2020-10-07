@@ -15,7 +15,7 @@ const DangerZoneSettings = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogError, setDialogError] = useState(false);
   const [dialogHelperText, setDialogHelperText] = useState("");
-  const { token, logout, setNotification } = useContext(AuthContext);
+  const { logout, setNotification } = useContext(AuthContext);
   const { loading, request } = useHttp();
   const handleSave = async () => {
     switch (action) {
@@ -39,9 +39,7 @@ const DangerZoneSettings = () => {
         "/api/settings/delete/progress",
         "POST",
         { submitPasswd },
-        {
-          Authorization: `Bearer ${token}`,
-        }
+        {}
       );
       setNotification({ open: true, message: data.message });
 
@@ -58,9 +56,7 @@ const DangerZoneSettings = () => {
         "/api/settings/delete/tasks",
         "POST",
         { submitPasswd },
-        {
-          Authorization: `Bearer ${token}`,
-        }
+        {}
       );
       setNotification({ open: true, message: data.message });
 
@@ -77,9 +73,7 @@ const DangerZoneSettings = () => {
         "/api/settings/delete/account",
         "POST",
         { submitPasswd },
-        {
-          Authorization: `Bearer ${token}`,
-        }
+        {}
       );
       setNotification({ open: true, message: data.message });
 
