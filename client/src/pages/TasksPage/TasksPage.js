@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import TaskAdder from "../../components/TaskAdder/TaskAdder";
 import TasksContainer from "../../components/TasksContainer/TasksContainer";
 import { useHttp } from "../../hooks/http.request";
@@ -16,7 +16,7 @@ export default function TasksPage() {
     if (isMounted.current) {
       setTasks(Object.entries(data));
     }
-  }, [request]);
+  }, [request, isMounted]);
   useEffect(() => {
     fetchTasks();
   }, [fetchTasks]);

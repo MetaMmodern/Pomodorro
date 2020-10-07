@@ -1,9 +1,7 @@
 import React from "react";
 import { Grid, Paper, IconButton } from "@material-ui/core";
 import { Edit, Delete, PlayArrow } from "@material-ui/icons";
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/auth.context";
 import { useHttp } from "../../hooks/http.request";
 
 import useStyles from "./Task.style";

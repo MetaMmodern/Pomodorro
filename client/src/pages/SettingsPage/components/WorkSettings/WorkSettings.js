@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import SaveSettingsButton from "../SaveSettingsButton/SaveSettingsButton";
 import TimeBlock from "../TimeBlock/TimeBlock";
 import SoundBlock from "../SoundBlock/SoundBlock";
@@ -13,17 +13,32 @@ const WorkSettings = () => {
   const classes = useStyles();
   const { loading, request } = useHttp();
   const { setNotification } = useContext(AuthContext);
+  const [tickSound, setTickSound] = useState("");
+  const [finishSound, setFinishSound] = useState("");
+
+  const [workTime, setWorkTime] = useState({ value: 20, error: null });
+  const [restTime, setRestTime] = useState({ value: 5, error: null });
+  const [settings, setSettings] = useState({});
+  const fetchSettings = useCallback(async () => {
+    const response = await request("/api/settings/settings", "GET", null, {});
+    // setSettings(response);
+    setWorkTime({ value: response.settings.workTime, error: null });
+    setRestTime({ value: response.settings.restTime, error: null });
+    setTickSound(response.settings.tickSound);
+    setFinishSound(response.settings.finishSound);
+    console.log(response);
+  }, [request, setSettings]);
+  useEffect(() => {
+    fetchSettings();
+    return () => {
+      setSettings(null);
+    };
+  }, [fetchSettings]);
 
   const [globalError, setGlobalError] = useState({
     workError: null,
     restError: null,
   });
-
-  const [tickSound, setTickSound] = useState("Metronome");
-  const [finishSound, setFinishSound] = useState("Ring");
-
-  const [workTime, setWorkTime] = useState({ value: 20, error: null });
-  const [restTime, setRestTime] = useState({ value: 5, error: null });
 
   const handleWorkTimeChange = (e) => {
     if (e.target.value > 35 || e.target.value < 5) {

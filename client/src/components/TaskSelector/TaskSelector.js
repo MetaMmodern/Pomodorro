@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useContext,
-  useRef,
-} from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import { connect } from "react-redux";
 import {
   Select,
@@ -53,7 +47,7 @@ function TaskSelector(props) {
       }
       fetchTasks();
     }
-  }, [fetchTasks, userId, request]);
+  }, [fetchTasks, userId, request, isMountedRef]);
   useEffect(() => {
     isMountedRef.current = true;
 
@@ -67,7 +61,7 @@ function TaskSelector(props) {
         id: props.selectedTask.id,
       });
     }
-  }, [props.selectedTask]);
+  }, [props.selectedTask, isMountedRef]);
 
   if (!userId) {
     return <></>;
