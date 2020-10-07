@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useHttp } from "../../hooks/http.request";
-import { AuthContext } from "../../context/auth.context";
 import { TextField, IconButton } from "@material-ui/core";
 import { AddCircle } from "@material-ui/icons";
 import useStyles from "./TaskAdder.style";
@@ -11,7 +10,6 @@ export default function TaskAdder(props) {
   const { request } = useHttp();
   const [task, setTask] = useState("");
   const [tasklength, setTasklength] = useState(true);
-  const { token } = useContext(AuthContext);
   useEffect(() => {
     if (firstFire.current) {
       if (!task.trim()) {
@@ -38,7 +36,7 @@ export default function TaskAdder(props) {
         {
           name: task,
         },
-        { authorization: `Bearer ${token}` }
+        {}
       );
       if (data.status === 201) {
         setTask("");

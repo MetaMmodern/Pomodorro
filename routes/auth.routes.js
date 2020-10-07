@@ -59,7 +59,7 @@ router.post(
   async (request, response) => {
     try {
       const errors = validationResult(request);
-      //here goes some code
+
       if (!errors.isEmpty()) {
         return response.status(401).json({
           errors: errors.array(),
@@ -77,15 +77,23 @@ router.post(
       if (!isMatch) {
         return response.status(401).json({ message: "Incorrect password" });
       }
-      const token = jwt.sign(
+      const access_token = jwt.sign(
         {
           userId: user.id,
         },
         config.get("jwtSecret"),
         { expiresIn: "1h" }
       );
+      const refresh_token = jwt.sign(
+        {
+          userId: user.id,
+        },
+        config.get("jwtSecret"),
+        { expiresIn: "30d" }
+      );
+      response.cookie("access_token", access_token, { httpOnly: true });
+      response.cookie("refresh_token", refresh_token, { httpOnly: true });
       return response.json({
-        token,
         userId: user.id,
         username: user.username ? user.username : user.email,
         times: {

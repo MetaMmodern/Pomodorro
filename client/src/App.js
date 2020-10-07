@@ -15,7 +15,6 @@ class App extends React.Component {
     this.logout = this.logout.bind(this);
     this.setNotification = this.setNotification.bind(this);
     this.state = {
-      token: "",
       userId: "",
       username: "",
       isAuth: false,
@@ -25,37 +24,33 @@ class App extends React.Component {
       },
     };
     const data = JSON.parse(localStorage.getItem("userData"));
-    if (data && data.token) {
+    if (data) {
       this.state = {
         ...this.state,
-        token: data.token,
         userId: data.userId,
         username: data.username,
         isAuth: true,
       };
     }
   }
-  login(jwtToken, id, inUsername) {
+  login(id, username) {
     this.setState({
       ...this.state,
-      token: jwtToken,
       userId: id,
-      username: inUsername,
+      username,
       isAuth: true,
     });
     localStorage.setItem(
       "userData",
       JSON.stringify({
         userId: id,
-        token: jwtToken,
-        username: inUsername,
+        username,
       })
     );
   }
   logout() {
     this.setState({
       ...this.state,
-      token: null,
       userId: null,
       username: null,
       isAuth: false,
@@ -67,7 +62,6 @@ class App extends React.Component {
       ...this.state,
       notification: { ...notification },
     });
-    console.log(this.state);
   }
   render() {
     return (

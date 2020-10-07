@@ -22,7 +22,7 @@ const AccountSettings = () => {
   const [submitPasswd, setSubmitPasswd] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const { token, logout, setNotification } = useContext(AuthContext);
+  const {  logout, setNotification } = useContext(AuthContext);
   const { loading, request } = useHttp();
   const handleDialogOpen = () => {
     setDialogOpen(true);
@@ -35,7 +35,7 @@ const AccountSettings = () => {
         "/api/settings/update/account",
         "POST",
         { newUsername, newPasswd, submitPasswd },
-        { Authorization: `Bearer ${token}` }
+        {  }
       );
       setNotification({
         open: true,

@@ -1,9 +1,7 @@
 import React from "react";
 import { Grid, Paper, IconButton } from "@material-ui/core";
 import { Edit, Delete, PlayArrow } from "@material-ui/icons";
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/auth.context";
 import { useHttp } from "../../hooks/http.request";
 
 import useStyles from "./Task.style";
@@ -11,12 +9,10 @@ import useStyles from "./Task.style";
 export default function Task(props) {
   const classes = useStyles();
   const { request } = useHttp();
-  const { token } = useContext(AuthContext);
+
   const deleteTask = async () => {
     try {
-      await request(`/api/tasks/delete/${props.id}/`, "GET", null, {
-        Authorization: `Bearer ${token}`,
-      });
+      await request(`/api/tasks/delete/${props.id}/`, "GET", null, {});
       await props.updateTasks();
     } catch (error) {}
   };
