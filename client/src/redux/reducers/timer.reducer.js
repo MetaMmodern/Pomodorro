@@ -8,8 +8,8 @@ import {
 
 const initialState = {
   percents: 0,
-  timeInMinutes: 2,
-  timeBackInMinutes: 1,
+  timeInMinutes: 20,
+  timeBackInMinutes: 5,
   color: "#3F51B5",
   backwardColor: "#43a047",
   width: 15,
