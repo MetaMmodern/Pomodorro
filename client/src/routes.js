@@ -2,12 +2,6 @@ import React, { lazy, Suspense } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import PageLoading from "./components/PageLoading/PageLoading";
 
-// import TimerPage from "./pages/TimerPage/TimerPage";
-// import TasksPage from "./pages/TasksPage/TasksPage";
-// import SettingsPage from "./pages/SettingsPage/SettingsPage";
-// import LoginPage from "./pages/AuthPages/LoginPage";
-// import RegisterPage from "./pages/AuthPages/RegisterPage";
-
 const TimerPage = lazy(() => import("./pages/TimerPage/TimerPage"));
 const TasksPage = lazy(() => import("./pages/TasksPage/TasksPage"));
 const SettingsPage = lazy(() => import("./pages/SettingsPage/SettingsPage"));

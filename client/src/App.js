@@ -3,6 +3,7 @@ import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import Panel from "./components/Panel/Panel";
 import Notification from "./components/Notification/Notification";
+import AudioBlock from "./components/AudioBlock/AudioBlock";
 
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthContext } from "./context/auth.context";
@@ -92,6 +93,7 @@ class App extends React.Component {
             ) : (
               ""
             )}
+            <AudioBlock />
           </main>
         </AuthContext.Provider>
       </Router>
