@@ -6,8 +6,10 @@ class AudioBlock extends React.Component {
   constructor(props) {
     super();
     this.audioRef = createRef();
+    this.finishAudioRef = createRef();
     this.state = {
       playing: false,
+      direction: "forward",
     };
   }
   componentDidMount() {
@@ -18,7 +20,11 @@ class AudioBlock extends React.Component {
       this.audioRef.current.play();
     }
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    console.log();
+    if (prevProps.direction !== this.props.direction) {
+      this.finishAudioRef.current.play();
+    }
     if (this.props.paused || this.props.stopped) {
       this.audioRef.current.pause();
       this.audioRef.current.currentTime = 0;
@@ -28,9 +34,14 @@ class AudioBlock extends React.Component {
   }
   render() {
     return ReactDOM.createPortal(
-      <audio loop ref={this.audioRef}>
-        <source src="./assets/audio/tick.mp3" type={"audio/mpeg"} />
-      </audio>,
+      <>
+        <audio loop ref={this.audioRef}>
+          <source src="./assets/audio/tick.mp3" type={"audio/mpeg"} />
+        </audio>
+        <audio ref={this.finishAudioRef}>
+          <source src="./assets/audio/finish/Blup.mp3" type={"audio/mpeg"} />
+        </audio>
+      </>,
       document.getElementById("audio-root")
     );
   }
