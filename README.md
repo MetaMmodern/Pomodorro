@@ -33,7 +33,7 @@ The application is fully responsive: you can use it both on mobile and on tablet
 
 ## Current issues
 
-- no sound is provided in timer
+- sound works, but is not setted from settings page
 - The tasks page is a little bit ugly
 - No reCaptcha is made on registration or login page
 
