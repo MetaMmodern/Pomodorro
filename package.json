@@ -6,6 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node app.js",
     "server": "nodemon app.js",
+    "test": "jest",
     "client": "npm run start --prefix client",
     "client:install": "npm install --prefix client",
     "client:build": "npm run build --prefix client",
@@ -34,7 +35,10 @@
     "mongoose": "^5.9.25"
   },
   "devDependencies": {
+    "chromedriver": "^89.0.0",
     "concurrently": "^5.2.0",
-    "nodemon": "^2.0.4"
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.4",
+    "selenium-webdriver": "^4.0.0-beta.2"
   }
 }

@@ -38,5 +38,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./jest.config.js",
+    "testEnvironment": "jest-environment-webdriver",
+    "testEnvironmentOptions": {
+      "browser": "chrome"
+    }
   }
 }
