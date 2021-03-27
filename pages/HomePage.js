@@ -1,6 +1,6 @@
 module.exports = class HomePage {
-  clickDropTimer() {}
-  clickStartTimer() {}
-  clickPauseTimer() {}
-  selectTask(taskName) {}
+  static async clickDropTimer() {}
+  static async clickStartTimer() {}
+  static async clickPauseTimer() {}
+  static async selectTask(taskName) {}
 };
