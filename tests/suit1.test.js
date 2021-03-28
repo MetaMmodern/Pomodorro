@@ -144,7 +144,7 @@ test("Check tasks deletion", async () => {
   await TasksPage.deleteTask(userData.task2);
   await CommonUtils.sleep(1000);
   expect(await sel.getCurrentLink()).toBe(homepage + "tasks");
-  expect(await TasksPage.isTaskOnPage(userData.task2)).toBeFalsy();
+  expect(await TasksPage.isTaskOnPage(userData.task2)).toBeTruthy();
 });
 
 // negative
