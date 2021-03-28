@@ -1,9 +1,20 @@
 pipeline {
-    agent { docker { image 'node:14-alpine' } }
+    agent any
     stages {
         stage('build') {
             steps {
-                sh 'npm --version'
+                sh 'npm install --only=dev'
+            }
+        }
+        stage('test'){
+          sh 'npm test'
+        }
+        post{
+            success{
+                echo "TESTS ARE OK"
+            }
+            failure{
+                echo "TESTS FAILED"
             }
         }
     }
