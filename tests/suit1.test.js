@@ -89,12 +89,12 @@ test("Check registration", async () => {
   await CommonUtils.sleep(500);
   await RegisterPage.fillRegistrationData(userData.login, userData.password);
   await RegisterPage.clickRegisterButton();
-  await CommonUtils.sleep(1000);
+  await CommonUtils.sleep(3000);
 
   expect(await sel.getCurrentLink()).toBe(homepage + "login");
   await LoginPage.fillLoginData(userData.login, userData.password);
   await LoginPage.clickLoginButton();
-  await CommonUtils.sleep(1000);
+  await CommonUtils.sleep(2000);
   expect(await sel.getCurrentLink()).toBe(homepage);
   // await loginWithTestData();
   await CommonUtils.openUserPopup();
