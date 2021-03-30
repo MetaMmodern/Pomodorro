@@ -136,10 +136,11 @@ test("Check tasks deletion", async () => {
   await CommonUtils.sleep(2000);
   await CommonUtils.openSidebar();
   await CommonUtils.openTasksPage();
-  await CommonUtils.sleep(3000);
+  await CommonUtils.sleep(4000);
   await TasksPage.createTask(userData.task1);
   await CommonUtils.sleep(3000);
   await TasksPage.createTask(userData.task2);
+  await CommonUtils.sleep(2000);
   await TasksPage.deleteTask(userData.task2);
   await CommonUtils.sleep(1000);
   expect(await sel.getCurrentLink()).toBe(homepage + "tasks");
