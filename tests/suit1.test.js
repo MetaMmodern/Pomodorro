@@ -13,7 +13,7 @@ const {
 const { reloadPage } = require("../utils/SelUtils");
 const sel = require("../utils/SelUtils");
 
-jest.setTimeout(30000);
+jest.setTimeout(100000);
 let driver;
 
 let homepage =
@@ -70,7 +70,7 @@ afterAll(async () => {
       console.log("no logged user found");
     }
   }
-  await sel.closeBrowser();
+  // await sel.closeBrowser();
 });
 
 // negative
