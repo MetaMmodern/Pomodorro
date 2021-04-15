@@ -14,29 +14,6 @@ const userData = {
   task2: "task2",
 };
 
-const loginWithTestData = async () => {
-  // try {
-  //   await CommonUtils.openLoginPage();
-  //   await CommonUtils.sleep(2000);
-  // } catch (error) {}
-  // await LoginPage.fillLoginData(userData.login, userData.password);
-  // await LoginPage.clickLoginButton();
-  // await CommonUtils.sleep(2000);
-  // try {
-  //   expect(await sel.getCurrentLink()).toBe('"http://localhost:3000/"');
-  // } catch (error) {
-  //   throw new Error("NO_USER");
-  // }
-};
-beforeAll(async () => {});
-
-afterEach(async () => {
-  {
-  }
-});
-
-afterAll(async () => {});
-
 test("Test user create", async () => {
   const res = await fetch(`${homepage}/api/auth/register`, {
     method: "POST",
@@ -49,6 +26,7 @@ test("Test user create", async () => {
 
   expect(res.status).toBe(201);
 });
+
 test("Test task add", async () => {
   const res = await fetch(`${homepage}/api/auth/login`, {
     method: "POST",
@@ -64,7 +42,6 @@ test("Test task add", async () => {
     decodeValues: true, // default: true
     map: true, //default: false
   });
-  console.log(cookies.access_token);
   expect(res.status).toBe(200);
 
   userData.access_token = cookies.access_token.value;
@@ -82,9 +59,9 @@ test("Test task add", async () => {
       Cookie: userData.cookie,
     },
   });
-  console.log(await res2.json());
   expect(res2.status).toBe(200);
 });
+
 test("Test task delete", async () => {
   const res = await fetch(`${homepage}/api/tasks/`, {
     method: "GET",
@@ -96,8 +73,8 @@ test("Test task delete", async () => {
     },
   });
   const allTasks = await res.json();
-  console.log(allTasks);
   const taskId = allTasks["0"]._id;
+
   const res2 = await fetch(`${homepage}/api/tasks/delete/${taskId}`, {
     method: "GET",
     credentials: "same-origin",
@@ -107,11 +84,11 @@ test("Test task delete", async () => {
       Cookie: userData.cookie,
     },
   });
-  console.log(await res2.json());
   expect(res2.status).toBe(200);
 });
+
 test("Test user delete", async () => {
-  const res2 = await fetch(`${homepage}/api/settings/delete/account`, {
+  const res = await fetch(`${homepage}/api/settings/delete/account`, {
     method: "POST",
     credentials: "same-origin",
     body: JSON.stringify({ submitPasswd: userData.password }),
@@ -121,6 +98,5 @@ test("Test user delete", async () => {
       Cookie: userData.cookie,
     },
   });
-  console.log(await res2.json());
-  expect(res2.status).toBe(200);
+  expect(res.status).toBe(200);
 });

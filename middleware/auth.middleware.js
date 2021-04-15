@@ -6,7 +6,6 @@ module.exports = (request, response, next) => {
   }
   try {
     const access_token = request.cookies.access_token;
-    console.log(request.cookies);
     if (!access_token) {
       return response
         .status(401)
