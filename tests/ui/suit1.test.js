@@ -9,9 +9,9 @@ const {
   TasksPage,
   SettingsPage,
   UserPopup,
-} = require("../pages");
-const { reloadPage } = require("../utils/SelUtils");
-const sel = require("../utils/SelUtils");
+} = require("../../pages");
+const { reloadPage } = require("../../utils/SelUtils");
+const sel = require("../../utils/SelUtils");
 
 jest.setTimeout(100000);
 let driver;

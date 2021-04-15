@@ -6,6 +6,7 @@ module.exports = (request, response, next) => {
   }
   try {
     const access_token = request.cookies.access_token;
+    console.log(request.cookies);
     if (!access_token) {
       return response
         .status(401)
@@ -15,35 +16,38 @@ module.exports = (request, response, next) => {
       if (err) {
         if (err.name === "TokenExpiredError") {
           const refresh_token = request.cookies.refresh_token;
-          jwt.verify(refresh_token, config.get("jwtSecret"), function (
-            err,
-            decoded
-          ) {
-            if (!err) {
-              const userId = decoded.userId;
-              const newAccess = jwt.sign(
-                {
-                  userId,
-                },
-                config.get("jwtSecret"),
-                { expiresIn: "1h" }
-              );
-              const newRefresh = jwt.sign(
-                {
-                  userId,
-                },
-                config.get("jwtSecret"),
-                { expiresIn: "30d" }
-              );
-              response.cookie("access_token", newAccess, { httpOnly: true });
-              response.cookie("refresh_token", newRefresh, { httpOnly: true });
-              request.user = decoded;
-              next();
-            } else {
-              console.log("so the refresh is dead ");
-              throw new Error(err);
+          jwt.verify(
+            refresh_token,
+            config.get("jwtSecret"),
+            function (err, decoded) {
+              if (!err) {
+                const userId = decoded.userId;
+                const newAccess = jwt.sign(
+                  {
+                    userId,
+                  },
+                  config.get("jwtSecret"),
+                  { expiresIn: "1h" }
+                );
+                const newRefresh = jwt.sign(
+                  {
+                    userId,
+                  },
+                  config.get("jwtSecret"),
+                  { expiresIn: "30d" }
+                );
+                response.cookie("access_token", newAccess, { httpOnly: true });
+                response.cookie("refresh_token", newRefresh, {
+                  httpOnly: true,
+                });
+                request.user = decoded;
+                next();
+              } else {
+                console.log("so the refresh is dead ");
+                throw new Error(err);
+              }
             }
-          });
+          );
         }
       } else {
         request.user = decoded;

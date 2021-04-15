@@ -32,7 +32,9 @@
     "express": "^4.17.1",
     "express-validator": "^6.6.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.25"
+    "mongoose": "^5.9.25",
+    "node-fetch": "^2.6.1",
+    "set-cookie-parser": "^2.4.8"
   },
   "devDependencies": {
     "chromedriver": "^89.0.0",
