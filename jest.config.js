@@ -16,4 +16,23 @@ module.exports = {
   coveragePathIgnorePatterns: ["/node_modules/"],
   // It indicates an array of directory names to be searched recursively up from the requiring module's location
   moduleDirectories: ["node_modules"],
+  reporters: [
+    "default",
+    // [
+    //   "./node_modules/jest-html-reporter",
+    //   {
+    //     pageTitle: "Test Report",
+    //     outputPath: "test-report/index.html",
+    //     includeFailureMsg: true,
+    //   },
+    // ],
+    [
+      "jest-html-reporters",
+      {
+        publicPath: "./test-report/",
+        filename: "index.html",
+        expand: true,
+      },
+    ],
+  ],
 };

@@ -103,3 +103,12 @@ dist
 # TernJS port file
 .tern-port
 
+
+
+# remove this later
+
+tests/migration/**/*
+
+
+
+test-report/*
