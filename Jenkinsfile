@@ -4,7 +4,7 @@ pipeline {
         ansiColor('xterm')
     }
     environment { 
-        homepage = 'https://evening-mesa-44346.herokuapp.com/'
+        homepage = 'http://evening-mesa-44346.herokuapp.com'
     }
     tools {nodejs "node"}
     stages {
@@ -15,7 +15,6 @@ pipeline {
         }
         stage('test api'){
             steps {
-                  sh 'npm run server'
                   sh 'npm test api'
             }
             post {
