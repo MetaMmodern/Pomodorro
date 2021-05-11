@@ -7,6 +7,7 @@
     "start": "cross-env NODE_ENV=production node app.js",
     "server": "nodemon app.js",
     "test": "jest",
+    "test:bdd": "cucumber-js",
     "client": "npm run start --prefix client",
     "client:install": "npm install --prefix client",
     "client:build": "npm run build --prefix client",
@@ -37,6 +38,7 @@
     "set-cookie-parser": "^2.4.8"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^7.2.1",
     "chromedriver": "^89.0.0",
     "concurrently": "^5.2.0",
     "jest": "^24.9.0",

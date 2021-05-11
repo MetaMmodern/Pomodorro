@@ -26,5 +26,18 @@ pipeline {
                 }
             }
         }
+        stage('test api using bdd'){
+            steps {
+                  sh 'npm run test:bdd'
+            }
+            post {
+                success {
+                    echo "TESTS ARE OK"
+                }
+                failure { 
+                    echo "TESTS FAILED"
+                }
+            }
+        }
     }
 }

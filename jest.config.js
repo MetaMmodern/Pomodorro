@@ -18,14 +18,6 @@ module.exports = {
   moduleDirectories: ["node_modules"],
   reporters: [
     "default",
-    // [
-    //   "./node_modules/jest-html-reporter",
-    //   {
-    //     pageTitle: "Test Report",
-    //     outputPath: "test-report/index.html",
-    //     includeFailureMsg: true,
-    //   },
-    // ],
     [
       "jest-html-reporters",
       {
