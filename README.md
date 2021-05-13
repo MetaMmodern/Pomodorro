@@ -40,3 +40,6 @@ The application is fully responsive: you can use it both on mobile and on tablet
 Feel free to create issues and notify me about new problems.
 
 The application is available [here](https://**evening**-mesa-44346.herokuapp.com/) (be patient, Heroku may load it very late)
+`
+
+Added tests`
